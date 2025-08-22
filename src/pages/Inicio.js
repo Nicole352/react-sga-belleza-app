@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles, Users, Award, ArrowRight, Play, Star, Heart, Scissors, ChevronLeft, ChevronRight } from 'lucide-react';
-import Footer from '../components/Footer'; // Importar el Footer
+import Footer from '../components/Footer';
 
 const PaginaInicio = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
-  // AQUÍ VAN TUS 4 IMÁGENES DEL HERO - Reemplaza estas URLs con las tuyas
+  // Manteniendo exactamente las URLs proporcionadas
   const heroImages = [
     {
       url: 'https://www.lahora.com.ec/__export/1753063265364/sites/lahora/img/2025/07/20/jexssica_vexlez.jpeg_1981115046.jpeg',
@@ -101,15 +101,15 @@ const PaginaInicio = () => {
     setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
   };
 
+  // ESTILOS - COLORES CONSISTENTES CON HEADER/FOOTER Y ESPACIADO REDUCIDO
   const containerStyle = {
     minHeight: '100vh',
-    background: 'linear-gradient(135deg, #000 0%, #1a1a1a 50%, #000 100%)',
+    background: 'rgba(0, 0, 0, 0.95)', // ← MISMO COLOR DEL HEADER/FOOTER
     position: 'relative',
     overflow: 'hidden',
-    fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif", // Tipografía ultra elegante
+    fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif",
   };
 
-  // Efectos de partículas flotantes animadas
   const particlesStyle = {
     position: 'absolute',
     top: 0,
@@ -117,14 +117,14 @@ const PaginaInicio = () => {
     width: '100%',
     height: '100%',
     pointerEvents: 'none',
-    opacity: 0.15,
+    opacity: 0.12, // ← REDUCIDO para más elegancia
     zIndex: 0,
   };
 
   const sectionStyle = {
     position: 'relative',
-    paddingTop: '128px',
-    paddingBottom: '80px', // Aumentado para más espacio para las cards
+    paddingTop: '90px', // ← MÁS REDUCIDO
+    paddingBottom: '30px', // ← MÁS REDUCIDO
     overflow: 'hidden',
     zIndex: 1,
     minHeight: '100vh',
@@ -132,7 +132,6 @@ const PaginaInicio = () => {
     alignItems: 'center',
   };
 
-  // Nuevo estilo para el hero con carrusel de imágenes
   const heroBackgroundStyle = {
     position: 'absolute',
     top: 0,
@@ -163,13 +162,13 @@ const PaginaInicio = () => {
     opacity: index === currentHeroImage ? 1 : 0,
     transition: 'opacity 1.5s ease-in-out',
     filter: 'contrast(1.1) brightness(1.05) saturate(1.1)',
-    transform: 'scale(1.02)', // Ligero zoom para efecto premium
+    transform: 'scale(1.02)',
   });
 
   const contentStyle = {
-    maxWidth: '1280px',
+    maxWidth: '1400px', // ← AUMENTADO para usar más espacio horizontal
     margin: '0 auto',
-    padding: '0 16px',
+    padding: '0 24px', // ← AUMENTADO para más contenido
     position: 'relative',
     fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif",
   };
@@ -184,8 +183,8 @@ const PaginaInicio = () => {
     backgroundColor: 'rgba(251, 191, 36, 0.2)',
     border: '1px solid rgba(251, 191, 36, 0.3)',
     borderRadius: '24px',
-    padding: '12px 20px',
-    marginBottom: '32px',
+    padding: '10px 18px', // ← REDUCIDO
+    marginBottom: '20px', // ← MÁS REDUCIDO
     backdropFilter: 'blur(15px)',
     boxShadow: '0 8px 32px rgba(251, 191, 36, 0.15)',
     fontFamily: "'Montserrat', 'Inter', 'Helvetica', sans-serif",
@@ -194,11 +193,11 @@ const PaginaInicio = () => {
   };
 
   const titleStyle = {
-    fontSize: '5rem',
-    fontWeight: '400', // Más elegante con weight menor
+    fontSize: '4.2rem', // ← LIGERAMENTE REDUCIDO
+    fontWeight: '400',
     color: 'white',
-    marginBottom: '24px',
-    lineHeight: '1.1',
+    marginBottom: '16px', // ← MÁS REDUCIDO
+    lineHeight: '1.05', // ← MÁS COMPACTO
     textShadow: '0 6px 30px rgba(0, 0, 0, 0.8)',
     fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif",
     letterSpacing: '-0.02em',
@@ -215,12 +214,12 @@ const PaginaInicio = () => {
   };
 
   const subtitleStyle = {
-    fontSize: '1.7rem',
+    fontSize: '1.4rem', // ← LIGERAMENTE REDUCIDO
     color: '#f3f4f6',
-    marginBottom: '32px',
-    maxWidth: '900px',
-    margin: '0 auto 32px',
-    lineHeight: '1.8',
+    marginBottom: '20px', // ← MÁS REDUCIDO
+    maxWidth: '850px', // ← AUMENTADO para usar más espacio
+    margin: '0 auto 20px',
+    lineHeight: '1.6', // ← MÁS COMPACTO
     textShadow: '0 4px 20px rgba(0, 0, 0, 0.8)',
     fontFamily: "'Crimson Text', 'Georgia', serif",
     fontWeight: '400',
@@ -228,9 +227,9 @@ const PaginaInicio = () => {
   };
 
   const dynamicSubtitleStyle = {
-    fontSize: '1.3rem',
+    fontSize: '1.15rem', // ← REDUCIDO
     color: '#fde68a',
-    marginBottom: '50px', // Aumentado para subir las cards
+    marginBottom: '28px', // ← MÁS REDUCIDO
     fontStyle: 'italic',
     textShadow: '0 2px 15px rgba(0, 0, 0, 0.7)',
     fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif",
@@ -243,19 +242,19 @@ const PaginaInicio = () => {
   const buttonContainerStyle = {
     display: 'flex',
     flexDirection: 'column',
-    gap: '20px',
+    gap: '14px', // ← MÁS REDUCIDO
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: '80px', // Aumentado para subir las cards
+    marginBottom: '40px', // ← MÁS REDUCIDO
   };
 
   const primaryButtonStyle = {
     background: 'linear-gradient(45deg, #fbbf24, #f59e0b, #fbbf24)',
     backgroundSize: '200% 200%',
     color: 'black',
-    padding: '18px 36px',
+    padding: '16px 32px', // ← REDUCIDO de 18px 36px
     borderRadius: '30px',
-    fontSize: '1.125rem',
+    fontSize: '1.1rem',
     fontWeight: '600',
     textDecoration: 'none',
     display: 'flex',
@@ -273,9 +272,9 @@ const PaginaInicio = () => {
   const secondaryButtonStyle = {
     border: '2px solid rgba(251, 191, 36, 0.6)',
     color: 'white',
-    padding: '18px 36px',
+    padding: '16px 32px', // ← REDUCIDO de 18px 36px
     borderRadius: '30px',
-    fontSize: '1.125rem',
+    fontSize: '1.1rem',
     fontWeight: '500',
     background: 'rgba(0, 0, 0, 0.3)',
     backdropFilter: 'blur(15px)',
@@ -289,29 +288,31 @@ const PaginaInicio = () => {
 
   const statsGridStyle = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-    gap: '32px',
-    maxWidth: '1100px',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', // ← AUMENTADO para cards más anchas
+    gap: '40px', // ← AUMENTADO gap horizontal
+    maxWidth: '1300px', // ← AUMENTADO para usar casi todo el ancho
     margin: '0 auto',
+    padding: '0 20px', // ← PADDING LATERAL AGREGADO
   };
 
   const statCardStyle = {
     backgroundColor: 'rgba(255, 255, 255, 0.08)',
     backdropFilter: 'blur(25px)',
     border: '1px solid rgba(251, 191, 36, 0.3)',
-    borderRadius: '24px',
-    padding: '32px',
+    borderRadius: '20px',
+    padding: '28px 36px', // ← PADDING HORIZONTAL AUMENTADO
     transform: isVisible ? 'translateY(0)' : 'translateY(50px)',
     opacity: isVisible ? 1 : 0,
     transition: 'all 0.8s ease-out',
     boxShadow: '0 16px 50px rgba(0, 0, 0, 0.4)',
+    width: '100%', // ← ASEGURAR QUE USE TODO EL ANCHO DISPONIBLE
   };
 
   const statNumberStyle = {
-    fontSize: '4rem',
+    fontSize: '3.5rem', // ← REDUCIDO de 4rem
     fontWeight: '300',
     color: '#fbbf24',
-    marginBottom: '16px',
+    marginBottom: '12px', // ← REDUCIDO de 16px
     textShadow: '0 6px 20px rgba(251, 191, 36, 0.5)',
     fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif",
     letterSpacing: '-0.02em',
@@ -322,7 +323,7 @@ const PaginaInicio = () => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: '1.15rem',
+    fontSize: '1.05rem', // ← REDUCIDO de 1.15rem
     fontFamily: "'Crimson Text', 'Georgia', serif",
     fontWeight: '400',
     letterSpacing: '0.5px',
@@ -331,36 +332,36 @@ const PaginaInicio = () => {
   // Indicadores del hero
   const heroIndicatorsStyle = {
     position: 'absolute',
-    bottom: '30px',
+    bottom: '24px', // ← REDUCIDO de 30px
     left: '50%',
     transform: 'translateX(-50%)',
     display: 'flex',
-    gap: '12px',
+    gap: '10px', // ← REDUCIDO de 12px
     zIndex: 5,
   };
 
   const heroIndicatorStyle = (isActive) => ({
-    width: isActive ? '40px' : '12px',
-    height: '12px',
-    borderRadius: '6px',
+    width: isActive ? '32px' : '10px', // ← REDUCIDO de 40px/12px
+    height: '10px', // ← REDUCIDO de 12px
+    borderRadius: '5px',
     backgroundColor: isActive ? '#fbbf24' : 'rgba(255, 255, 255, 0.4)',
     cursor: 'pointer',
     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
     boxShadow: isActive ? '0 0 20px rgba(251, 191, 36, 0.6)' : 'none',
   });
 
-  // Estilos del carrusel de instalaciones (sin cambios)
+  // Estilos del carrusel de instalaciones
   const carouselSectionStyle = {
-    padding: '80px 0',
+    padding: '40px 0', // ← MÁS REDUCIDO VERTICALMENTE
     position: 'relative',
   };
 
   const carouselContainerStyle = {
     position: 'relative',
     width: '100%',
-    height: '600px',
+    height: '450px', // ← MÁS REDUCIDO VERTICALMENTE
     margin: '0 auto',
-    borderRadius: '24px',
+    borderRadius: '20px',
     overflow: 'hidden',
     boxShadow: '0 25px 80px rgba(0, 0, 0, 0.6)',
     border: '1px solid rgba(251, 191, 36, 0.2)',
@@ -400,22 +401,22 @@ const PaginaInicio = () => {
     textAlign: 'center',
     color: 'white',
     zIndex: 2,
-    padding: '40px',
+    padding: '32px', // ← REDUCIDO de 40px
     transform: 'scale(1)',
     transition: 'transform 0.5s ease-in-out',
   };
 
   const slideEmojiStyle = {
-    fontSize: '8rem',
-    marginBottom: '30px',
+    fontSize: '6rem', // ← REDUCIDO de 8rem
+    marginBottom: '20px', // ← REDUCIDO de 30px
     filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.5))',
     animation: 'float 4s ease-in-out infinite',
   };
 
   const slideTitleStyle = {
-    fontSize: '3rem',
+    fontSize: '2.5rem', // ← REDUCIDO de 3rem
     fontWeight: '700',
-    marginBottom: '20px',
+    marginBottom: '16px', // ← REDUCIDO de 20px
     textShadow: '0 6px 20px rgba(0,0,0,0.5)',
     background: 'linear-gradient(45deg, #fff, #fbbf24)',
     WebkitBackgroundClip: 'text',
@@ -424,10 +425,10 @@ const PaginaInicio = () => {
   };
 
   const slideDescStyle = {
-    fontSize: '1.3rem',
+    fontSize: '1.2rem', // ← REDUCIDO de 1.3rem
     opacity: 0.95,
     textShadow: '0 3px 10px rgba(0,0,0,0.5)',
-    maxWidth: '600px',
+    maxWidth: '480px', // ← REDUCIDO de 600px
     margin: '0 auto',
     fontFamily: "'Inter', 'Helvetica', sans-serif",
   };
@@ -439,7 +440,7 @@ const PaginaInicio = () => {
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
     border: '2px solid rgba(251, 191, 36, 0.3)',
     color: '#fbbf24',
-    padding: '20px',
+    padding: '16px', // ← REDUCIDO de 20px
     borderRadius: '50%',
     cursor: 'pointer',
     transition: 'all 0.3s',
@@ -450,25 +451,25 @@ const PaginaInicio = () => {
 
   const leftNavStyle = {
     ...carouselNavStyle,
-    left: '30px',
+    left: '20px', // ← REDUCIDO de 30px
   };
 
   const rightNavStyle = {
     ...carouselNavStyle,
-    right: '30px',
+    right: '20px', // ← REDUCIDO de 30px
   };
 
   const dotsContainerStyle = {
     display: 'flex',
     justifyContent: 'center',
-    gap: '16px',
-    marginTop: '30px',
+    gap: '12px', // ← REDUCIDO de 16px
+    marginTop: '20px', // ← REDUCIDO de 30px
   };
 
   const dotStyle = (isActive) => ({
-    width: isActive ? '50px' : '15px',
-    height: '15px',
-    borderRadius: '10px',
+    width: isActive ? '40px' : '12px', // ← REDUCIDO de 50px/15px
+    height: '12px', // ← REDUCIDO de 15px
+    borderRadius: '8px', // ← REDUCIDO de 10px
     backgroundColor: isActive ? '#fbbf24' : 'rgba(255, 255, 255, 0.4)',
     cursor: 'pointer',
     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -476,15 +477,15 @@ const PaginaInicio = () => {
   });
 
   const featuresStyle = {
-    padding: '80px 0',
+    padding: '40px 0', // ← MÁS REDUCIDO VERTICALMENTE
     position: 'relative',
   };
 
   const featuresTitleStyle = {
-    fontSize: '3.5rem',
+    fontSize: '2.8rem', // ← MÁS REDUCIDO VERTICALMENTE
     fontWeight: '700',
     color: 'white',
-    marginBottom: '24px',
+    marginBottom: '12px', // ← MÁS REDUCIDO
     textAlign: 'center',
     textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
     fontFamily: "'Playfair Display', 'Georgia', serif",
@@ -492,10 +493,10 @@ const PaginaInicio = () => {
   };
 
   const featuresSubtitleStyle = {
-    fontSize: '1.3rem',
+    fontSize: '1.15rem', // ← REDUCIDO
     color: '#d1d5db',
     maxWidth: '600px',
-    margin: '0 auto 64px',
+    margin: '0 auto 32px', // ← MÁS REDUCIDO
     textAlign: 'center',
     fontFamily: "'Inter', 'Helvetica', sans-serif",
     lineHeight: '1.6',
@@ -503,59 +504,63 @@ const PaginaInicio = () => {
 
   const featuresGridStyle = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-    gap: '32px',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', // ← AUMENTADO para cards más anchas
+    gap: '40px', // ← AUMENTADO gap
+    maxWidth: '1300px', // ← AUMENTADO para usar casi todo el ancho
+    margin: '0 auto',
+    padding: '0 20px', // ← PADDING LATERAL AGREGADO
   };
 
   const featureCardStyle = {
     background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02))',
     backdropFilter: 'blur(20px)',
     border: '1px solid rgba(251, 191, 36, 0.2)',
-    borderRadius: '24px',
-    padding: '36px',
+    borderRadius: '20px',
+    padding: '32px 36px', // ← PADDING HORIZONTAL AUMENTADO
     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
     cursor: 'pointer',
     boxShadow: '0 12px 40px rgba(0, 0, 0, 0.3)',
+    width: '100%', // ← ASEGURAR QUE USE TODO EL ANCHO DISPONIBLE
   };
 
   const featureIconStyle = {
-    width: '80px',
-    height: '80px',
+    width: '64px', // ← REDUCIDO de 80px
+    height: '64px',
     background: 'linear-gradient(45deg, #fbbf24, #f59e0b)',
-    borderRadius: '20px',
+    borderRadius: '16px', // ← REDUCIDO de 20px
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: '28px',
+    marginBottom: '20px', // ← REDUCIDO de 28px
     transition: 'transform 0.3s',
     boxShadow: '0 10px 30px rgba(251, 191, 36, 0.3)',
   };
 
   const featureTitleStyle = {
-    fontSize: '1.6rem',
+    fontSize: '1.4rem', // ← REDUCIDO de 1.6rem
     fontWeight: '700',
     color: 'white',
-    marginBottom: '16px',
+    marginBottom: '12px', // ← REDUCIDO de 16px
     fontFamily: "'Playfair Display', 'Georgia', serif",
   };
 
   const featureDescStyle = {
     color: '#d1d5db',
-    lineHeight: '1.7',
+    lineHeight: '1.6',
     fontFamily: "'Inter', 'Helvetica', sans-serif",
-    fontSize: '1rem',
+    fontSize: '0.95rem',
   };
 
   const ctaStyle = {
-    padding: '80px 0',
+    padding: '40px 0', // ← MÁS REDUCIDO VERTICALMENTE
   };
 
   const ctaContentStyle = {
     background: 'linear-gradient(45deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.15))',
     border: '1px solid rgba(251, 191, 36, 0.3)',
-    borderRadius: '28px',
-    padding: '60px',
-    maxWidth: '1100px',
+    borderRadius: '24px',
+    padding: '36px 48px', // ← PADDING HORIZONTAL AUMENTADO
+    maxWidth: '1000px', // ← AUMENTADO para usar más espacio
     margin: '0 auto',
     textAlign: 'center',
     backdropFilter: 'blur(20px)',
@@ -563,19 +568,19 @@ const PaginaInicio = () => {
   };
 
   const ctaTitleStyle = {
-    fontSize: '3.5rem',
+    fontSize: '2.8rem', // ← MÁS REDUCIDO
     fontWeight: '700',
     color: 'white',
-    marginBottom: '24px',
+    marginBottom: '16px', // ← MÁS REDUCIDO
     textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
     fontFamily: "'Playfair Display', 'Georgia', serif",
     letterSpacing: '-0.01em',
   };
 
   const ctaTextStyle = {
-    fontSize: '1.3rem',
+    fontSize: '1.15rem', // ← REDUCIDO
     color: '#d1d5db',
-    marginBottom: '36px',
+    marginBottom: '24px', // ← MÁS REDUCIDO
     fontFamily: "'Inter', 'Helvetica', sans-serif",
     lineHeight: '1.6',
   };
@@ -590,7 +595,7 @@ const PaginaInicio = () => {
 
       {/* Efectos de fondo con partículas animadas */}
       <div style={particlesStyle}>
-        {[...Array(25)].map((_, i) => (
+        {[...Array(20)].map((_, i) => (
           <div
             key={i}
             style={{
@@ -658,12 +663,35 @@ const PaginaInicio = () => {
 
             {/* Botones CTA */}
             <div style={buttonContainerStyle}>
-              <Link to="/cursos" style={{...primaryButtonStyle, zIndex: 10, position: 'relative'}}>
+              <Link 
+                to="/cursos" 
+                style={{...primaryButtonStyle, zIndex: 10, position: 'relative'}}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'translateY(-2px) scale(1.05)';
+                  e.target.style.boxShadow = '0 16px 50px rgba(251, 191, 36, 0.5)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'translateY(0) scale(1)';
+                  e.target.style.boxShadow = '0 12px 40px rgba(251, 191, 36, 0.4)';
+                }}
+              >
                 Ver Cursos Disponibles
-                <ArrowRight size={20} style={{ marginLeft: '8px' }} />
+                <ArrowRight size={18} style={{ marginLeft: '8px' }} />
               </Link>
-              <button style={{...secondaryButtonStyle, zIndex: 10, position: 'relative'}}>
-                <Play size={20} style={{ marginRight: '8px' }} />
+              <button 
+                style={{...secondaryButtonStyle, zIndex: 10, position: 'relative'}}
+                onMouseEnter={(e) => {
+                  e.target.style.background = 'rgba(251, 191, 36, 0.1)';
+                  e.target.style.borderColor = 'rgba(251, 191, 36, 0.8)';
+                  e.target.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = 'rgba(0, 0, 0, 0.3)';
+                  e.target.style.borderColor = 'rgba(251, 191, 36, 0.6)';
+                  e.target.style.transform = 'translateY(0)';
+                }}
+              >
+                <Play size={18} style={{ marginRight: '8px' }} />
                 Ver Instalaciones
               </button>
             </div>
@@ -710,7 +738,7 @@ const PaginaInicio = () => {
       {/* Carrusel de Instalaciones */}
       <section style={carouselSectionStyle}>
         <div style={contentStyle}>
-          <h2 style={{...featuresTitleStyle, marginBottom: '50px'}}>
+          <h2 style={{...featuresTitleStyle, marginBottom: '32px'}}>
             Conoce Nuestras 
             <span style={gradientTextStyle}> Instalaciones</span>
           </h2>
@@ -730,11 +758,37 @@ const PaginaInicio = () => {
             </div>
 
             {/* Navegación */}
-            <button style={leftNavStyle} onClick={prevSlide}>
-              <ChevronLeft size={24} />
+            <button 
+              style={leftNavStyle} 
+              onClick={prevSlide}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = 'rgba(251, 191, 36, 0.2)';
+                e.target.style.borderColor = 'rgba(251, 191, 36, 0.6)';
+                e.target.style.transform = 'translateY(-50%) scale(1.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                e.target.style.borderColor = 'rgba(251, 191, 36, 0.3)';
+                e.target.style.transform = 'translateY(-50%) scale(1)';
+              }}
+            >
+              <ChevronLeft size={20} />
             </button>
-            <button style={rightNavStyle} onClick={nextSlide}>
-              <ChevronRight size={24} />
+            <button 
+              style={rightNavStyle} 
+              onClick={nextSlide}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = 'rgba(251, 191, 36, 0.2)';
+                e.target.style.borderColor = 'rgba(251, 191, 36, 0.6)';
+                e.target.style.transform = 'translateY(-50%) scale(1.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                e.target.style.borderColor = 'rgba(251, 191, 36, 0.3)';
+                e.target.style.transform = 'translateY(-50%) scale(1)';
+              }}
+            >
+              <ChevronRight size={20} />
             </button>
           </div>
 
@@ -763,9 +817,21 @@ const PaginaInicio = () => {
           </p>
 
           <div style={featuresGridStyle}>
-            <div style={featureCardStyle}>
+            <div 
+              style={featureCardStyle}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-6px)';
+                e.currentTarget.style.boxShadow = '0 20px 60px rgba(251, 191, 36, 0.2)';
+                e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.3)';
+                e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.2)';
+              }}
+            >
               <div style={featureIconStyle}>
-                <Heart size={36} color="black" />
+                <Heart size={28} color="black" />
               </div>
               <h3 style={featureTitleStyle}>Atención Personalizada</h3>
               <p style={featureDescStyle}>
@@ -774,9 +840,21 @@ const PaginaInicio = () => {
               </p>
             </div>
 
-            <div style={featureCardStyle}>
+            <div 
+              style={featureCardStyle}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-6px)';
+                e.currentTarget.style.boxShadow = '0 20px 60px rgba(251, 191, 36, 0.2)';
+                e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.3)';
+                e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.2)';
+              }}
+            >
               <div style={featureIconStyle}>
-                <Scissors size={36} color="black" />
+                <Scissors size={28} color="black" />
               </div>
               <h3 style={featureTitleStyle}>Técnicas Avanzadas</h3>
               <p style={featureDescStyle}>
@@ -785,9 +863,21 @@ const PaginaInicio = () => {
               </p>
             </div>
 
-            <div style={featureCardStyle}>
+            <div 
+              style={featureCardStyle}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-6px)';
+                e.currentTarget.style.boxShadow = '0 20px 60px rgba(251, 191, 36, 0.2)';
+                e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.3)';
+                e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.2)';
+              }}
+            >
               <div style={featureIconStyle}>
-                <Award size={36} color="black" />
+                <Award size={28} color="black" />
               </div>
               <h3 style={featureTitleStyle}>Certificación Profesional</h3>
               <p style={featureDescStyle}>
@@ -812,6 +902,14 @@ const PaginaInicio = () => {
             <Link 
               to="/cursos"
               style={primaryButtonStyle}
+              onMouseEnter={(e) => {
+                e.target.style.transform = 'translateY(-2px) scale(1.05)';
+                e.target.style.boxShadow = '0 16px 50px rgba(251, 191, 36, 0.5)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = 'translateY(0) scale(1)';
+                e.target.style.boxShadow = '0 12px 40px rgba(251, 191, 36, 0.4)';
+              }}
             >
               <Sparkles size={18} style={{ marginRight: '8px' }} />
               Ver Cursos Disponibles

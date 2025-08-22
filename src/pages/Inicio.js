@@ -1,12 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles, Users, Award, ArrowRight, Play, Star, Heart, Scissors, ChevronLeft, ChevronRight } from 'lucide-react';
+import Footer from '../components/Footer'; // Importar el Footer
 
 const PaginaInicio = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentHeroImage, setCurrentHeroImage] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Imágenes del carrusel con contenido espectacular
+  // AQUÍ VAN TUS 4 IMÁGENES DEL HERO - Reemplaza estas URLs con las tuyas
+  const heroImages = [
+    {
+      url: 'https://www.lahora.com.ec/__export/1753063265364/sites/lahora/img/2025/07/20/jexssica_vexlez.jpeg_1981115046.jpeg',
+      title: 'Técnicas Avanzadas en Estética',
+      subtitle: 'Aprende con la mejor tecnología del mercado'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1926&q=80',
+      title: 'Tratamientos Faciales de Lujo',
+      subtitle: 'Formación integral en cuidado facial profesional'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      title: 'Medicina Estética Moderna',
+      subtitle: 'Cursos especializados en las últimas tendencias'
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      title: 'Instalaciones de Primera Clase',
+      subtitle: 'Ambiente profesional para tu formación'
+    }
+  ];
+
+  // Imágenes del carrusel de instalaciones
   const carouselImages = [
     {
       id: 1,
@@ -50,13 +76,21 @@ const PaginaInicio = () => {
     }
   ];
 
-  // Auto-scroll del carrusel
+  // Auto-scroll del carrusel de instalaciones cada 4 segundos
   useEffect(() => {
     setIsVisible(true);
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
     }, 4000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Auto-scroll del hero cada 5 segundos
+  useEffect(() => {
+    const heroInterval = setInterval(() => {
+      setCurrentHeroImage((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(heroInterval);
   }, []);
 
   const nextSlide = () => {
@@ -72,6 +106,7 @@ const PaginaInicio = () => {
     background: 'linear-gradient(135deg, #000 0%, #1a1a1a 50%, #000 100%)',
     position: 'relative',
     overflow: 'hidden',
+    fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif", // Tipografía ultra elegante
   };
 
   // Efectos de partículas flotantes animadas
@@ -89,16 +124,25 @@ const PaginaInicio = () => {
   const sectionStyle = {
     position: 'relative',
     paddingTop: '128px',
-    paddingBottom: '40px',
+    paddingBottom: '80px', // Aumentado para más espacio para las cards
     overflow: 'hidden',
     zIndex: 1,
-    minHeight: '80vh',
+    minHeight: '100vh',
     display: 'flex',
     alignItems: 'center',
   };
 
-  // Imagen de fondo para el hero - OPTIMIZADA PARA MÁXIMA CALIDAD
+  // Nuevo estilo para el hero con carrusel de imágenes
   const heroBackgroundStyle = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: -1,
+  };
+
+  const heroImageStyle = (index) => ({
     position: 'absolute',
     top: 0,
     left: 0,
@@ -107,33 +151,27 @@ const PaginaInicio = () => {
     background: `
       linear-gradient(
         135deg, 
-        rgba(0, 0, 0, 0.5) 0%, 
+        rgba(0, 0, 0, 0.4) 0%, 
         rgba(0, 0, 0, 0.2) 50%, 
         rgba(0, 0, 0, 0.6) 100%
       ),
-      url('https://www.lahora.com.ec/__export/1753063265364/sites/lahora/img/2025/07/20/jexssica_vexlez.jpeg_1981115046.jpeg')
+      url('${heroImages[index].url}')
     `,
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
     backgroundRepeat: 'no-repeat',
-    backgroundAttachment: 'scroll',
-    width: '100%',
-    height: '100%',
-    imageRendering: 'crisp-edges',
-    imageRendering: '-webkit-optimize-contrast',
-    imageRendering: 'optimize-quality',
+    opacity: index === currentHeroImage ? 1 : 0,
+    transition: 'opacity 1.5s ease-in-out',
     filter: 'contrast(1.1) brightness(1.05) saturate(1.1)',
-    WebkitBackfaceVisibility: 'hidden',
-    WebkitTransform: 'translateZ(0)',
-    transform: 'translateZ(0)',
-    zIndex: -1,
-  };
+    transform: 'scale(1.02)', // Ligero zoom para efecto premium
+  });
 
   const contentStyle = {
     maxWidth: '1280px',
     margin: '0 auto',
     padding: '0 16px',
     position: 'relative',
+    fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif",
   };
 
   const textCenterStyle = {
@@ -146,19 +184,24 @@ const PaginaInicio = () => {
     backgroundColor: 'rgba(251, 191, 36, 0.2)',
     border: '1px solid rgba(251, 191, 36, 0.3)',
     borderRadius: '24px',
-    padding: '8px 16px',
+    padding: '12px 20px',
     marginBottom: '32px',
-    backdropFilter: 'blur(10px)',
-    boxShadow: '0 8px 32px rgba(251, 191, 36, 0.1)',
+    backdropFilter: 'blur(15px)',
+    boxShadow: '0 8px 32px rgba(251, 191, 36, 0.15)',
+    fontFamily: "'Montserrat', 'Inter', 'Helvetica', sans-serif",
+    fontWeight: '500',
+    letterSpacing: '0.5px',
   };
 
   const titleStyle = {
-    fontSize: '4rem',
-    fontWeight: 'bold',
+    fontSize: '5rem',
+    fontWeight: '400', // Más elegante con weight menor
     color: 'white',
     marginBottom: '24px',
     lineHeight: '1.1',
-    textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
+    textShadow: '0 6px 30px rgba(0, 0, 0, 0.8)',
+    fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif",
+    letterSpacing: '-0.02em',
   };
 
   const gradientTextStyle = {
@@ -168,94 +211,145 @@ const PaginaInicio = () => {
     WebkitTextFillColor: 'transparent',
     display: 'block',
     animation: 'gradientShift 3s ease-in-out infinite',
+    fontStyle: 'italic',
   };
 
   const subtitleStyle = {
-    fontSize: '1.5rem',
-    color: '#d1d5db',
+    fontSize: '1.7rem',
+    color: '#f3f4f6',
     marginBottom: '32px',
-    maxWidth: '768px',
+    maxWidth: '900px',
     margin: '0 auto 32px',
-    lineHeight: '1.6',
-    textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
+    lineHeight: '1.8',
+    textShadow: '0 4px 20px rgba(0, 0, 0, 0.8)',
+    fontFamily: "'Crimson Text', 'Georgia', serif",
+    fontWeight: '400',
+    letterSpacing: '0.3px',
+  };
+
+  const dynamicSubtitleStyle = {
+    fontSize: '1.3rem',
+    color: '#fde68a',
+    marginBottom: '50px', // Aumentado para subir las cards
+    fontStyle: 'italic',
+    textShadow: '0 2px 15px rgba(0, 0, 0, 0.7)',
+    fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif",
+    opacity: 0.95,
+    transition: 'all 1s ease-in-out',
+    fontWeight: '300',
+    letterSpacing: '0.5px',
   };
 
   const buttonContainerStyle = {
     display: 'flex',
     flexDirection: 'column',
-    gap: '16px',
+    gap: '20px',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: '64px',
+    marginBottom: '80px', // Aumentado para subir las cards
   };
 
   const primaryButtonStyle = {
     background: 'linear-gradient(45deg, #fbbf24, #f59e0b, #fbbf24)',
     backgroundSize: '200% 200%',
     color: 'black',
-    padding: '16px 32px',
-    borderRadius: '24px',
+    padding: '18px 36px',
+    borderRadius: '30px',
     fontSize: '1.125rem',
     fontWeight: '600',
     textDecoration: 'none',
     display: 'flex',
     alignItems: 'center',
-    transition: 'all 0.3s',
-    boxShadow: '0 8px 32px rgba(251, 191, 36, 0.4)',
+    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+    boxShadow: '0 12px 40px rgba(251, 191, 36, 0.4)',
     animation: 'buttonPulse 2s ease-in-out infinite',
+    fontFamily: "'Montserrat', 'Inter', 'Helvetica', sans-serif",
+    letterSpacing: '0.8px',
+    textTransform: 'uppercase',
+    border: 'none',
+    cursor: 'pointer',
   };
 
   const secondaryButtonStyle = {
-    border: '2px solid rgba(251, 191, 36, 0.5)',
+    border: '2px solid rgba(251, 191, 36, 0.6)',
     color: 'white',
-    padding: '16px 32px',
-    borderRadius: '24px',
+    padding: '18px 36px',
+    borderRadius: '30px',
     fontSize: '1.125rem',
-    fontWeight: '600',
+    fontWeight: '500',
     background: 'rgba(0, 0, 0, 0.3)',
-    backdropFilter: 'blur(10px)',
+    backdropFilter: 'blur(15px)',
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
-    transition: 'all 0.3s',
+    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+    fontFamily: "'Montserrat', 'Inter', 'Helvetica', sans-serif",
+    letterSpacing: '0.5px',
   };
 
   const statsGridStyle = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
     gap: '32px',
-    maxWidth: '1024px',
+    maxWidth: '1100px',
     margin: '0 auto',
   };
 
   const statCardStyle = {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    backdropFilter: 'blur(15px)',
-    border: '1px solid rgba(251, 191, 36, 0.2)',
-    borderRadius: '16px',
-    padding: '24px',
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    backdropFilter: 'blur(25px)',
+    border: '1px solid rgba(251, 191, 36, 0.3)',
+    borderRadius: '24px',
+    padding: '32px',
     transform: isVisible ? 'translateY(0)' : 'translateY(50px)',
     opacity: isVisible ? 1 : 0,
     transition: 'all 0.8s ease-out',
-    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+    boxShadow: '0 16px 50px rgba(0, 0, 0, 0.4)',
   };
 
   const statNumberStyle = {
-    fontSize: '3rem',
-    fontWeight: 'bold',
+    fontSize: '4rem',
+    fontWeight: '300',
     color: '#fbbf24',
-    marginBottom: '8px',
-    textShadow: '0 2px 10px rgba(251, 191, 36, 0.3)',
+    marginBottom: '16px',
+    textShadow: '0 6px 20px rgba(251, 191, 36, 0.5)',
+    fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif",
+    letterSpacing: '-0.02em',
   };
 
   const statTextStyle = {
-    color: '#d1d5db',
+    color: '#f3f4f6',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    fontSize: '1.15rem',
+    fontFamily: "'Crimson Text', 'Georgia', serif",
+    fontWeight: '400',
+    letterSpacing: '0.5px',
   };
 
-  // Estilos del carrusel espectacular
+  // Indicadores del hero
+  const heroIndicatorsStyle = {
+    position: 'absolute',
+    bottom: '30px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    display: 'flex',
+    gap: '12px',
+    zIndex: 5,
+  };
+
+  const heroIndicatorStyle = (isActive) => ({
+    width: isActive ? '40px' : '12px',
+    height: '12px',
+    borderRadius: '6px',
+    backgroundColor: isActive ? '#fbbf24' : 'rgba(255, 255, 255, 0.4)',
+    cursor: 'pointer',
+    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+    boxShadow: isActive ? '0 0 20px rgba(251, 191, 36, 0.6)' : 'none',
+  });
+
+  // Estilos del carrusel de instalaciones (sin cambios)
   const carouselSectionStyle = {
     padding: '80px 0',
     position: 'relative',
@@ -320,12 +414,13 @@ const PaginaInicio = () => {
 
   const slideTitleStyle = {
     fontSize: '3rem',
-    fontWeight: 'bold',
+    fontWeight: '700',
     marginBottom: '20px',
     textShadow: '0 6px 20px rgba(0,0,0,0.5)',
     background: 'linear-gradient(45deg, #fff, #fbbf24)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
+    fontFamily: "'Playfair Display', 'Georgia', serif",
   };
 
   const slideDescStyle = {
@@ -334,6 +429,7 @@ const PaginaInicio = () => {
     textShadow: '0 3px 10px rgba(0,0,0,0.5)',
     maxWidth: '600px',
     margin: '0 auto',
+    fontFamily: "'Inter', 'Helvetica', sans-serif",
   };
 
   const carouselNavStyle = {
@@ -385,62 +481,69 @@ const PaginaInicio = () => {
   };
 
   const featuresTitleStyle = {
-    fontSize: '3rem',
-    fontWeight: 'bold',
+    fontSize: '3.5rem',
+    fontWeight: '700',
     color: 'white',
     marginBottom: '24px',
     textAlign: 'center',
     textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
+    fontFamily: "'Playfair Display', 'Georgia', serif",
+    letterSpacing: '-0.01em',
   };
 
   const featuresSubtitleStyle = {
-    fontSize: '1.25rem',
+    fontSize: '1.3rem',
     color: '#d1d5db',
-    maxWidth: '512px',
+    maxWidth: '600px',
     margin: '0 auto 64px',
     textAlign: 'center',
+    fontFamily: "'Inter', 'Helvetica', sans-serif",
+    lineHeight: '1.6',
   };
 
   const featuresGridStyle = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
     gap: '32px',
   };
 
   const featureCardStyle = {
     background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02))',
-    backdropFilter: 'blur(15px)',
+    backdropFilter: 'blur(20px)',
     border: '1px solid rgba(251, 191, 36, 0.2)',
-    borderRadius: '20px',
-    padding: '32px',
+    borderRadius: '24px',
+    padding: '36px',
     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
     cursor: 'pointer',
-    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+    boxShadow: '0 12px 40px rgba(0, 0, 0, 0.3)',
   };
 
   const featureIconStyle = {
-    width: '70px',
-    height: '70px',
+    width: '80px',
+    height: '80px',
     background: 'linear-gradient(45deg, #fbbf24, #f59e0b)',
-    borderRadius: '18px',
+    borderRadius: '20px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: '24px',
+    marginBottom: '28px',
     transition: 'transform 0.3s',
-    boxShadow: '0 8px 25px rgba(251, 191, 36, 0.3)',
+    boxShadow: '0 10px 30px rgba(251, 191, 36, 0.3)',
   };
 
   const featureTitleStyle = {
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
+    fontSize: '1.6rem',
+    fontWeight: '700',
     color: 'white',
     marginBottom: '16px',
+    fontFamily: "'Playfair Display', 'Georgia', serif",
   };
 
   const featureDescStyle = {
     color: '#d1d5db',
-    lineHeight: '1.6',
+    lineHeight: '1.7',
+    fontFamily: "'Inter', 'Helvetica', sans-serif",
+    fontSize: '1rem',
   };
 
   const ctaStyle = {
@@ -450,34 +553,44 @@ const PaginaInicio = () => {
   const ctaContentStyle = {
     background: 'linear-gradient(45deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.15))',
     border: '1px solid rgba(251, 191, 36, 0.3)',
-    borderRadius: '24px',
-    padding: '48px',
-    maxWidth: '1024px',
+    borderRadius: '28px',
+    padding: '60px',
+    maxWidth: '1100px',
     margin: '0 auto',
     textAlign: 'center',
-    backdropFilter: 'blur(15px)',
-    boxShadow: '0 25px 50px rgba(0, 0, 0, 0.3)',
+    backdropFilter: 'blur(20px)',
+    boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4)',
   };
 
   const ctaTitleStyle = {
-    fontSize: '3rem',
-    fontWeight: 'bold',
+    fontSize: '3.5rem',
+    fontWeight: '700',
     color: 'white',
     marginBottom: '24px',
     textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
+    fontFamily: "'Playfair Display', 'Georgia', serif",
+    letterSpacing: '-0.01em',
   };
 
   const ctaTextStyle = {
-    fontSize: '1.25rem',
+    fontSize: '1.3rem',
     color: '#d1d5db',
-    marginBottom: '32px',
+    marginBottom: '36px',
+    fontFamily: "'Inter', 'Helvetica', sans-serif",
+    lineHeight: '1.6',
   };
 
   return (
     <div style={containerStyle}>
+      {/* Google Fonts */}
+      <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet"
+      />
+
       {/* Efectos de fondo con partículas animadas */}
       <div style={particlesStyle}>
-        {[...Array(20)].map((_, i) => (
+        {[...Array(25)].map((_, i) => (
           <div
             key={i}
             style={{
@@ -494,10 +607,14 @@ const PaginaInicio = () => {
         ))}
       </div>
 
-      {/* Hero Section */}
+      {/* Hero Section con Carrusel */}
       <section style={sectionStyle}>
-        {/* Imagen de fondo del hero */}
-        <div style={heroBackgroundStyle} />
+        {/* Carrusel de imágenes de fondo */}
+        <div style={heroBackgroundStyle}>
+          {heroImages.map((image, index) => (
+            <div key={index} style={heroImageStyle(index)} />
+          ))}
+        </div>
         
         {/* Overlay adicional para mejor legibilidad */}
         <div style={{
@@ -506,7 +623,7 @@ const PaginaInicio = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%)',
+          background: 'radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%)',
           zIndex: 0,
         }} />
 
@@ -515,21 +632,26 @@ const PaginaInicio = () => {
             {/* Badge */}
             <div style={badgeStyle}>
               <Sparkles size={16} style={{ color: '#fbbf24', marginRight: '8px' }} />
-              <span style={{ color: '#fde68a', fontSize: '0.875rem', fontWeight: '500' }}>
+              <span style={{ color: '#fde68a', fontSize: '0.95rem', fontWeight: '500' }}>
                 Educación de Excelencia en Estética
               </span>
             </div>
 
             {/* Título Principal */}
-            <h1 style={{...titleStyle, textShadow: '0 6px 30px rgba(0, 0, 0, 0.8)'}}>
+            <h1 style={{...titleStyle, textShadow: '0 8px 40px rgba(0, 0, 0, 0.9)'}}>
               Transforma vidas
               <span style={gradientTextStyle}>
                 con Belleza
               </span>
             </h1>
 
-            {/* Subtítulo */}
-            <p style={{...subtitleStyle, textShadow: '0 4px 20px rgba(0, 0, 0, 0.8)'}}>
+            {/* Subtítulo dinámico basado en la imagen actual */}
+            <p style={dynamicSubtitleStyle}>
+              {heroImages[currentHeroImage].subtitle}
+            </p>
+
+            {/* Subtítulo principal */}
+            <p style={{...subtitleStyle, textShadow: '0 6px 25px rgba(0, 0, 0, 0.9)'}}>
               Conviértete en una esteticista profesional con nuestros cursos certificados. 
               Aprende técnicas avanzadas de belleza y estética con los mejores especialistas.
             </p>
@@ -572,9 +694,20 @@ const PaginaInicio = () => {
             </div>
           </div>
         </div>
+
+        {/* Indicadores del Hero */}
+        <div style={heroIndicatorsStyle}>
+          {heroImages.map((_, index) => (
+            <div
+              key={index}
+              style={heroIndicatorStyle(index === currentHeroImage)}
+              onClick={() => setCurrentHeroImage(index)}
+            />
+          ))}
+        </div>
       </section>
 
-      {/* Carrusel Espectacular */}
+      {/* Carrusel de Instalaciones */}
       <section style={carouselSectionStyle}>
         <div style={contentStyle}>
           <h2 style={{...featuresTitleStyle, marginBottom: '50px'}}>
@@ -632,34 +765,34 @@ const PaginaInicio = () => {
           <div style={featuresGridStyle}>
             <div style={featureCardStyle}>
               <div style={featureIconStyle}>
-                <Heart size={32} color="black" />
+                <Heart size={36} color="black" />
               </div>
               <h3 style={featureTitleStyle}>Atención Personalizada</h3>
               <p style={featureDescStyle}>
                 Grupos reducidos y atención individual para garantizar el mejor aprendizaje. 
-                Cada estudiante recibe seguimiento personalizado.
+                Cada estudiante recibe seguimiento personalizado durante todo el proceso.
               </p>
             </div>
 
             <div style={featureCardStyle}>
               <div style={featureIconStyle}>
-                <Scissors size={32} color="black" />
+                <Scissors size={36} color="black" />
               </div>
               <h3 style={featureTitleStyle}>Técnicas Avanzadas</h3>
               <p style={featureDescStyle}>
                 Aprende las últimas técnicas en tratamientos faciales, corporales, 
-                depilación láser y medicina estética moderna.
+                depilación láser y medicina estética con equipos de última generación.
               </p>
             </div>
 
             <div style={featureCardStyle}>
               <div style={featureIconStyle}>
-                <Award size={32} color="black" />
+                <Award size={36} color="black" />
               </div>
               <h3 style={featureTitleStyle}>Certificación Profesional</h3>
               <p style={featureDescStyle}>
                 Obtén tu certificación reconocida nacionalmente y accede a oportunidades 
-                laborales en los mejores spas y centros estéticos.
+                laborales en los mejores spas y centros estéticos del país.
               </p>
             </div>
           </div>
@@ -680,11 +813,15 @@ const PaginaInicio = () => {
               to="/cursos"
               style={primaryButtonStyle}
             >
+              <Sparkles size={18} style={{ marginRight: '8px' }} />
               Ver Cursos Disponibles
             </Link>
           </div>
         </div>
       </section>
+
+      {/* Footer Component */}
+      <Footer />
 
       <style>{`
         @keyframes gradientShift {
@@ -693,8 +830,14 @@ const PaginaInicio = () => {
         }
         
         @keyframes buttonPulse {
-          0%, 100% { box-shadow: 0 8px 32px rgba(251, 191, 36, 0.4); }
-          50% { box-shadow: 0 12px 40px rgba(251, 191, 36, 0.6); }
+          0%, 100% { 
+            box-shadow: 0 12px 40px rgba(251, 191, 36, 0.4);
+            transform: translateY(0) scale(1);
+          }
+          50% { 
+            box-shadow: 0 16px 50px rgba(251, 191, 36, 0.6);
+            transform: translateY(-2px) scale(1.02);
+          }
         }
         
         @keyframes float {
@@ -703,8 +846,117 @@ const PaginaInicio = () => {
         }
         
         @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.2); }
+          0%, 100% { 
+            opacity: 0.3; 
+            transform: scale(1); 
+          }
+          50% { 
+            opacity: 1; 
+            transform: scale(1.3); 
+          }
+        }
+
+        /* Hover effects para mejorar la interactividad */
+        ${featureCardStyle}:hover {
+          transform: translateY(-8px) scale(1.02);
+          box-shadow: 0 20px 60px rgba(251, 191, 36, 0.2);
+          border-color: rgba(251, 191, 36, 0.4);
+        }
+
+        ${featureIconStyle}:hover {
+          transform: scale(1.1) rotate(5deg);
+        }
+
+        ${primaryButtonStyle}:hover {
+          transform: translateY(-3px) scale(1.05);
+          box-shadow: 0 16px 50px rgba(251, 191, 36, 0.6);
+          background-position: 100% 0;
+        }
+
+        ${secondaryButtonStyle}:hover {
+          background: rgba(251, 191, 36, 0.1);
+          border-color: rgba(251, 191, 36, 0.8);
+          transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+          ${titleStyle} {
+            fontSize: 3rem;
+          }
+          
+          ${subtitleStyle} {
+            fontSize: 1.3rem;
+          }
+          
+          ${featuresTitleStyle} {
+            fontSize: 2.5rem;
+          }
+          
+          ${ctaTitleStyle} {
+            fontSize: 2.5rem;
+          }
+          
+          ${statsGridStyle} {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
+          
+          ${featuresGridStyle} {
+            grid-template-columns: 1fr;
+            gap: 24px;
+          }
+          
+          ${buttonContainerStyle} {
+            flex-direction: column;
+            gap: 16px;
+          }
+          
+          ${carouselContainerStyle} {
+            height: 500px;
+          }
+          
+          ${slideEmojiStyle} {
+            fontSize: 6rem;
+          }
+          
+          ${slideTitleStyle} {
+            fontSize: 2.2rem;
+          }
+          
+          ${slideDescStyle} {
+            fontSize: 1.1rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          ${titleStyle} {
+            fontSize: 2.5rem;
+          }
+          
+          ${subtitleStyle} {
+            fontSize: 1.1rem;
+          }
+          
+          ${carouselContainerStyle} {
+            height: 400px;
+          }
+          
+          ${ctaContentStyle} {
+            padding: 40px 24px;
+          }
+          
+          ${featureCardStyle} {
+            padding: 24px;
+          }
+          
+          ${statCardStyle} {
+            padding: 20px;
+          }
+          
+          ${statNumberStyle} {
+            fontSize: 2.8rem;
+          }
         }
       `}</style>
     </div>

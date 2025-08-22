@@ -72,6 +72,7 @@ const Header = () => {
     transition: 'all 0.3s ease',
     position: 'relative',
     overflow: 'hidden',
+    fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif", // ← AGREGADO
   };
 
   const logoGlowStyle = {
@@ -93,13 +94,15 @@ const Header = () => {
 
   const logoMainStyle = {
     fontSize: '26px',
-    fontWeight: 'bold',
+    fontWeight: '400', // ← CAMBIADO de 'bold' a '400'
     background: 'linear-gradient(45deg, #fbbf24, #f59e0b, #fbbf24)',
     backgroundSize: '200% 200%',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     animation: 'textShine 3s ease-in-out infinite',
     textShadow: '0 2px 10px rgba(251, 191, 36, 0.3)',
+    fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif", // ← AGREGADO
+    letterSpacing: '-0.5px', // ← AGREGADO
   };
 
   const logoSubStyle = {
@@ -108,6 +111,7 @@ const Header = () => {
     marginTop: '-2px',
     fontWeight: '500',
     letterSpacing: '0.5px',
+    fontFamily: "'Montserrat', sans-serif", // ← AGREGADO
   };
 
   const navLinksStyle = {
@@ -126,6 +130,8 @@ const Header = () => {
     padding: '12px 0',
     textShadow: active ? '0 0 10px rgba(251, 191, 36, 0.5)' : 'none',
     transform: active ? 'translateY(-2px)' : 'translateY(0)',
+    fontFamily: "'Montserrat', 'Inter', 'Helvetica', sans-serif", // ← AGREGADO
+    letterSpacing: '0.3px', // ← AGREGADO
   });
 
   const linkUnderlineStyle = (active) => ({
@@ -158,6 +164,7 @@ const Header = () => {
     animation: 'buttonGlow 2s ease-in-out infinite',
     letterSpacing: '0.5px',
     textTransform: 'uppercase',
+    fontFamily: "'Montserrat', 'Inter', 'Helvetica', sans-serif", // ← AGREGADO
   };
 
   const mobileMenuButtonStyle = {
@@ -209,6 +216,7 @@ const Header = () => {
     textAlign: 'center',
     fontSize: '18px',
     transition: 'all 0.3s ease',
+    fontFamily: "'Montserrat', 'Inter', 'Helvetica', sans-serif", // ← AGREGADO
   });
 
   return (

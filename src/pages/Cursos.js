@@ -5,51 +5,30 @@ import { Sparkles } from 'lucide-react';
 const cursosData = [
   {
     id: 1,
-    titulo: 'Cosmetologia',
+    titulo: 'Estética Facial',
     descripcion: 'Aprende técnicas profesionales de limpieza, hidratación y rejuvenecimiento facial.',
-    imagen: 'https://res.cloudinary.com/dfczvdz7b/image/upload/v1755893924/cursos_xrnjuu.png',
-    enlace: '/aula-virtual?curso=facial'
+    imagen: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80',
+    enlace: '/detalle-curso'
   },
   {
     id: 2,
-    titulo: 'Cosmiatria',
+    titulo: 'Manicuría y Uñas',
     descripcion: 'Domina el arte de la manicura, esmaltado semipermanente y decoración de uñas.',
-    imagen: 'https://res.cloudinary.com/dfczvdz7b/image/upload/v1755893924/cursos_xrnjuu.png',
-    enlace: '/aula-virtual?curso=manicuria'
+    imagen: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80',
+    enlace: '/detalle-curso'
   },
   {
     id: 3,
-    titulo: 'Maquillaje Profesional',
+    titulo: 'Depilación Profesional',
     descripcion: 'Conoce los métodos más efectivos y seguros de depilación corporal y facial.',
-    imagen: 'https://res.cloudinary.com/dfczvdz7b/image/upload/v1755893924/cursos_xrnjuu.png',
-    enlace: '/aula-virtual?curso=depilacion'
-  },
-   {
-    id: 4,
-    titulo: 'Lashista Profesional',
-    descripcion: 'Aprende técnicas profesionales de limpieza, hidratación y rejuvenecimiento facial.',
-    imagen: 'https://res.cloudinary.com/dfczvdz7b/image/upload/v1755893924/cursos_xrnjuu.png',
-    enlace: '/aula-virtual?curso=facial'
-  },
-  {
-    id: 5,
-    titulo: 'Tecnicas en Uñas',
-    descripcion: 'Domina el arte de la manicura, esmaltado semipermanente y decoración de uñas.',
-    imagen: 'https://res.cloudinary.com/dfczvdz7b/image/upload/v1755893924/cursos_xrnjuu.png',
-    enlace: '/aula-virtual?curso=manicuria'
-  },
-  {
-    id: 6,
-    titulo: 'Belleza Integral',
-    descripcion: 'Conoce los métodos más efectivos y seguros de depilación corporal y facial.',
-    imagen: 'https://res.cloudinary.com/dfczvdz7b/image/upload/v1755893924/cursos_xrnjuu.png',
-    enlace: '/aula-virtual?curso=depilacion'
+    imagen: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
+    enlace: '/detalle-curso'
   }
 ];
 
 const pageStyle = {
   minHeight: '100vh',
-  background: 'radial-gradient(circle,rgba(245, 158, 11, 1) 0%, rgba(0, 0, 0, 1) 25%)',
+  background: 'linear-gradient(120deg, #fbbf24 0%, #f59e0b 100%)',
   paddingTop: '110px',
   paddingBottom: '40px'
 };
@@ -63,14 +42,14 @@ const containerStyle = {
 const titleStyle = {
   fontSize: '2.5rem',
   fontWeight: 'bold',
-  color: '#d9dde7ff',
+  color: '#1a202c',
   marginBottom: '16px',
-  textShadow: '0 2px 10px rgba(255, 255, 255, 0.15)'
+  textShadow: '0 2px 10px rgba(251,191,36,0.15)'
 };
 
 const subtitleStyle = {
   fontSize: '1.2rem',
-  color: '#dd983dff',
+  color: '#7c4700',
   marginBottom: '36px'
 };
 
@@ -81,7 +60,7 @@ const gridStyle = {
 };
 
 const cardStyle = {
-  background: 'rgba(240, 228, 228, 0.98)',
+  background: 'rgba(255,255,255,0.98)',
   borderRadius: '18px',
   boxShadow: '0 8px 32px rgba(251,191,36,0.18)',
   overflow: 'hidden',

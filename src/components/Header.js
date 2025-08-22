@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sparkles, Crown } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,9 +36,9 @@ const Header = () => {
   };
 
   const containerStyle = {
-    maxWidth: '1400px',
-    margin: '0 auto',
-    padding: '0 24px',
+    maxWidth: '100%', // ← CAMBIADO: usar todo el ancho disponible
+    margin: '0',
+    padding: '0 5%', // ← CAMBIADO: padding porcentual más ajustado
   };
 
   const navStyle = {
@@ -46,77 +46,27 @@ const Header = () => {
     justifyContent: 'space-between',
     alignItems: 'center',
     transition: 'all 0.3s ease',
+    maxWidth: '1400px', // ← Contenido máximo centrado
+    margin: '0 auto', // ← Centrado del contenido
   };
 
   const logoContainerStyle = {
     display: 'flex',
     alignItems: 'center',
-    gap: '16px',
     textDecoration: 'none',
     transition: 'all 0.3s ease',
   };
 
-  const logoStyle = {
-    width: '56px',
-    height: '56px',
-    background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)',
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    border: '3px solid #fbbf24',
-    color: 'black',
-    fontWeight: 'bold',
-    fontSize: '22px',
-    boxShadow: '0 8px 25px rgba(251, 191, 36, 0.4)',
+  const logoImageStyle = {
+    height: '60px', // ← Altura ajustada para el logo
+    width: 'auto',
     transition: 'all 0.3s ease',
-    position: 'relative',
-    overflow: 'hidden',
-    fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif", // ← AGREGADO
-  };
-
-  const logoGlowStyle = {
-    position: 'absolute',
-    top: '10%',
-    left: '10%',
-    width: '30%',
-    height: '30%',
-    background: 'radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%)',
-    borderRadius: '50%',
-    animation: 'logoShine 3s ease-in-out infinite',
-  };
-
-  const logoTextStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    transition: 'all 0.3s ease',
-  };
-
-  const logoMainStyle = {
-    fontSize: '26px',
-    fontWeight: '400', // ← CAMBIADO de 'bold' a '400'
-    background: 'linear-gradient(45deg, #fbbf24, #f59e0b, #fbbf24)',
-    backgroundSize: '200% 200%',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    animation: 'textShine 3s ease-in-out infinite',
-    textShadow: '0 2px 10px rgba(251, 191, 36, 0.3)',
-    fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif", // ← AGREGADO
-    letterSpacing: '-0.5px', // ← AGREGADO
-  };
-
-  const logoSubStyle = {
-    fontSize: '13px',
-    color: '#fde68a',
-    marginTop: '-2px',
-    fontWeight: '500',
-    letterSpacing: '0.5px',
-    fontFamily: "'Montserrat', sans-serif", // ← AGREGADO
+    filter: 'drop-shadow(0 4px 15px rgba(251, 191, 36, 0.3))',
   };
 
   const navLinksStyle = {
     display: isMobile ? 'none' : 'flex',
-    gap: '40px',
+    gap: '32px', // ← Espacio entre enlaces
     alignItems: 'center',
   };
 
@@ -130,8 +80,8 @@ const Header = () => {
     padding: '12px 0',
     textShadow: active ? '0 0 10px rgba(251, 191, 36, 0.5)' : 'none',
     transform: active ? 'translateY(-2px)' : 'translateY(0)',
-    fontFamily: "'Montserrat', 'Inter', 'Helvetica', sans-serif", // ← AGREGADO
-    letterSpacing: '0.3px', // ← AGREGADO
+    fontFamily: "'Montserrat', 'Inter', 'Helvetica', sans-serif",
+    letterSpacing: '0.3px',
   });
 
   const linkUnderlineStyle = (active) => ({
@@ -146,26 +96,6 @@ const Header = () => {
     transition: 'width 0.3s ease',
     boxShadow: active ? '0 0 10px rgba(251, 191, 36, 0.6)' : 'none',
   });
-
-  const loginButtonStyle = {
-    background: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%)',
-    backgroundSize: '200% 200%',
-    color: 'black',
-    padding: '12px 28px',
-    borderRadius: '30px',
-    fontWeight: '700',
-    fontSize: '14px',
-    textDecoration: 'none',
-    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-    boxShadow: '0 8px 25px rgba(251, 191, 36, 0.4)',
-    border: '2px solid transparent',
-    position: 'relative',
-    overflow: 'hidden',
-    animation: 'buttonGlow 2s ease-in-out infinite',
-    letterSpacing: '0.5px',
-    textTransform: 'uppercase',
-    fontFamily: "'Montserrat', 'Inter', 'Helvetica', sans-serif", // ← AGREGADO
-  };
 
   const mobileMenuButtonStyle = {
     display: isMobile ? 'flex' : 'none',
@@ -216,40 +146,32 @@ const Header = () => {
     textAlign: 'center',
     fontSize: '18px',
     transition: 'all 0.3s ease',
-    fontFamily: "'Montserrat', 'Inter', 'Helvetica', sans-serif", // ← AGREGADO
+    fontFamily: "'Montserrat', 'Inter', 'Helvetica', sans-serif",
   });
 
   return (
     <>
       <nav style={headerStyle}>
-        <div style={containerStyle}>
+        <div style={containerStyle} className="header-container">
           <div style={navStyle}>
-            {/* Logo Mejorado */}
+            {/* Logo con imagen */}
             <Link to="/" style={logoContainerStyle}>
-              <div style={logoStyle}>
-                <div style={logoGlowStyle} />
-                <span>JV</span>
-                <Crown 
-                  size={12} 
-                  style={{
-                    position: 'absolute',
-                    top: '5px',
-                    right: '8px',
-                    color: '#fbbf24',
-                    filter: 'drop-shadow(0 0 3px rgba(251, 191, 36, 0.8))'
-                  }} 
-                />
-              </div>
-              <div style={logoTextStyle}>
-                <span style={logoMainStyle}>Jessica Vélez</span>
-                <span style={logoSubStyle}>
-                  <Sparkles size={10} style={{ marginRight: '4px', display: 'inline' }} />
-                  Escuela de Esteticistas
-                </span>
-              </div>
+              <img 
+                src="https://res.cloudinary.com/di090ggjn/image/upload/v1755893582/catjq75bgehyzkzb0ryc.jpg"
+                alt="Jessica Vélez - Escuela de Esteticistas"
+                style={logoImageStyle}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'scale(1.05)';
+                  e.target.style.filter = 'drop-shadow(0 6px 20px rgba(251, 191, 36, 0.5))';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'scale(1)';
+                  e.target.style.filter = 'drop-shadow(0 4px 15px rgba(251, 191, 36, 0.3))';
+                }}
+              />
             </Link>
 
-            {/* Desktop Navigation Mejorada */}
+            {/* Navigation Links - Movidos al lado derecho */}
             <div style={navLinksStyle}>
               {[
                 { path: '/', label: 'Inicio' },
@@ -281,28 +203,7 @@ const Header = () => {
               ))}
             </div>
 
-            {/* Botón Login Premium */}
-            <div style={{ display: isMobile ? 'none' : 'block' }}>
-              <Link 
-                to="/aula-virtual" 
-                style={loginButtonStyle}
-                onMouseEnter={(e) => {
-                  e.target.style.transform = 'translateY(-3px) scale(1.05)';
-                  e.target.style.boxShadow = '0 12px 35px rgba(251, 191, 36, 0.6)';
-                  e.target.style.backgroundPosition = '100% 0';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.transform = 'translateY(0) scale(1)';
-                  e.target.style.boxShadow = '0 8px 25px rgba(251, 191, 36, 0.4)';
-                  e.target.style.backgroundPosition = '0% 0';
-                }}
-              >
-                <Sparkles size={14} style={{ marginRight: '8px' }} />
-                Iniciar Sesión
-              </Link>
-            </div>
-
-            {/* Mobile Menu Button Mejorado */}
+            {/* Mobile Menu Button */}
             <button
               style={mobileMenuButtonStyle}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -323,7 +224,7 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation Premium */}
+        {/* Mobile Navigation */}
         <div style={mobileMenuStyle}>
           <div style={mobileLinksStyle}>
             {[
@@ -340,48 +241,36 @@ const Header = () => {
                 {item.label}
               </Link>
             ))}
-            
-            <Link 
-              to="/aula-virtual"
-              style={{
-                ...loginButtonStyle,
-                textAlign: 'center',
-                display: 'block',
-                marginTop: '10px'
-              }}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <Sparkles size={14} style={{ marginRight: '8px' }} />
-              Iniciar Sesión
-            </Link>
           </div>
         </div>
       </nav>
 
       {/* Estilos CSS para animaciones */}
       <style>{`
-        @keyframes logoShine {
-          0%, 100% { 
-            opacity: 0.6; 
-            transform: translate(10%, 10%) scale(1);
-          }
-          50% { 
-            opacity: 1; 
-            transform: translate(20%, 20%) scale(1.2);
+        /* Responsive adjustments para padding */
+        @media (max-width: 1200px) {
+          .header-container {
+            padding: 0 3% !important;
           }
         }
 
-        @keyframes textShine {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
+        @media (max-width: 768px) {
+          .header-container {
+            padding: 0 4% !important;
+          }
+          
+          img[alt="Jessica Vélez - Escuela de Esteticistas"] {
+            height: 50px !important;
+          }
         }
 
-        @keyframes buttonGlow {
-          0%, 100% { 
-            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+        @media (max-width: 480px) {
+          .header-container {
+            padding: 0 3% !important;
           }
-          50% { 
-            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.6);
+          
+          img[alt="Jessica Vélez - Escuela de Esteticistas"] {
+            height: 45px !important;
           }
         }
       `}</style>

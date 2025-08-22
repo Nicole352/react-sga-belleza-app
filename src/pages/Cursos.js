@@ -28,7 +28,7 @@ const cursosData = [
 
 const pageStyle = {
   minHeight: '100vh',
-  background: 'linear-gradient(120deg, #fbbf24 0%, #f59e0b 100%)',
+  background: 'linear-gradient(120deg, #141414ff 0%, #3f3c37ff 100%)',
   paddingTop: '110px',
   paddingBottom: '40px'
 };
@@ -42,14 +42,14 @@ const containerStyle = {
 const titleStyle = {
   fontSize: '2.5rem',
   fontWeight: 'bold',
-  color: '#1a202c',
+  color: '#f2f2f3ff',
   marginBottom: '16px',
-  textShadow: '0 2px 10px rgba(251,191,36,0.15)'
+  textShadow: '0 2px 10px rgba(223, 187, 98, 0.15)'
 };
 
 const subtitleStyle = {
   fontSize: '1.2rem',
-  color: '#7c4700',
+  color: '#d69c51ff',
   marginBottom: '36px'
 };
 
@@ -60,7 +60,7 @@ const gridStyle = {
 };
 
 const cardStyle = {
-  background: 'rgba(255,255,255,0.98)',
+  background: 'rgba(228, 209, 209, 0.98)',
   borderRadius: '18px',
   boxShadow: '0 8px 32px rgba(251,191,36,0.18)',
   overflow: 'hidden',

@@ -5,6 +5,7 @@ import PaginaCursos from './pages/Cursos';
 import PaginaAulaVirtual from './pages/AulaVirtual';
 import DetalleCurso from './pages/DetalleCurso';
 import Header from './components/Header';
+import Pago from './pages/Pago';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/cursos" element={<PaginaCursos />} />
           <Route path="/aula-virtual" element={<PaginaAulaVirtual />} />
           <Route path="/detalle-curso" element={<DetalleCurso />} />
+          <Route path="/pago" element={<Pago />} />
         </Routes>
       </div>
     </Router>

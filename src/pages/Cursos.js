@@ -14,6 +14,7 @@ import {
   ChevronRight,
   Calendar
 } from 'lucide-react';
+import Footer from '../components/Footer';
 
 const cursosData = [
   {
@@ -34,7 +35,7 @@ const cursosData = [
     titulo: 'Cosmiatría',
     descripcion: 'Especialízate en tratamientos estéticos avanzados y equipos de última tecnología para el cuidado profesional de la piel.',
     imagen: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80',
-    enlace: '/detalle-curso?curso=cosmiatria',
+    enlace: '/detalle-curso',
     duracion: '8 meses',
     estudiantes: 620,
     rating: 4.8,
@@ -47,7 +48,7 @@ const cursosData = [
     titulo: 'Maquillaje Profesional',
     descripcion: 'Domina el arte del maquillaje social, artístico y de alta costura con técnicas profesionales y productos premium.',
     imagen: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=600&q=80',
-    enlace: '/detalle-curso?curso=maquillaje',
+    enlace: '/detalle-curso',
     duracion: '4 meses',
     estudiantes: 1200,
     rating: 4.9,
@@ -60,7 +61,7 @@ const cursosData = [
     titulo: 'Lashista Profesional',
     descripcion: 'Conviértete en experta en extensiones de pestañas, lifting de pestañas y todas las técnicas de embellecimiento de mirada.',
     imagen: 'https://images.unsplash.com/photo-1583001931096-959e9a1a6223?auto=format&fit=crop&w=600&q=80',
-    enlace: '/detalle-curso?curso=lashista',
+    enlace: '/detalle-curso',
     duracion: '3 meses',
     estudiantes: 950,
     rating: 4.8,
@@ -73,7 +74,7 @@ const cursosData = [
     titulo: 'Técnico en Uñas',
     descripcion: 'Perfecciona el arte de la manicura, esmaltado semipermanente, acrílicas, gel y las últimas tendencias en nail art.',
     imagen: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80',
-    enlace: '/detalle-curso?curso=unas',
+    enlace: '/detalle-curso',
     duracion: '5 meses',
     estudiantes: 1100,
     rating: 4.7,
@@ -86,13 +87,14 @@ const cursosData = [
     titulo: 'Belleza Integral',
     descripcion: 'Curso completo que abarca todas las áreas de la belleza: facial, corporal, uñas y maquillaje en un programa integral.',
     imagen: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=80',
-    enlace: '/detalle-curso?curso=integral',
+    enlace: '/detalle-curso',
     duracion: '12 meses',
     estudiantes: 780,
     rating: 5.0,
     icon: <Heart size={24} />,
     color: '#00b894',
-    categoria: 'Completo'
+    categoria: 'Completo',
+    certificacion: 'Certificado Profesional'
   }
 ];
 
@@ -361,7 +363,7 @@ const Cursos = () => {
           position: 'relative',
           overflow: 'hidden',
           paddingTop: '110px',
-          paddingBottom: '60px'
+          paddingBottom: '0px'
         }}
       >
         {/* Partículas flotantes */}
@@ -436,7 +438,7 @@ const Cursos = () => {
                 lineHeight: 1.6
               }}
             >
-              Programas diseñados por expertos de la industria con certificación internacional
+              Programas diseñados por expertos de la industria con certificados profesionales
             </p>
           </div>
 
@@ -594,7 +596,7 @@ const Cursos = () => {
                   }}
                 >
                   <Star size={20} color="#fbbf24" />
-                  Certificación Internacional
+                  Certificado Profesional
                 </div>
               </div>
 
@@ -641,9 +643,12 @@ const Cursos = () => {
               >
                 Sé el primero en enterarte cuando abramos las inscripciones
               </p>
+
             </div>
           </div>
         </div>
+
+        <Footer />
       </div>
     </>
   );

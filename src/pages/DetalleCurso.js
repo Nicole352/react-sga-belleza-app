@@ -8,7 +8,6 @@ import {
   Award, 
   Star, 
   ChevronDown, 
-  ChevronUp, 
   Play, 
   Check,
   BookOpen,
@@ -44,7 +43,88 @@ const detallesCursos = {
     estudiantes: 1250,
     instructor: 'María González',
     precio: '$2,500',
-    certificacion: 'Certificación Internacional'
+    certificacion: 'Certificado Profesional'
+  },
+  cosmetologia: {
+    titulo: 'Cosmetología',
+    descripcion: 'Aprende técnicas profesionales de limpieza, hidratación y rejuvenecimiento facial.',
+    duracion: '6 meses',
+    requisitos: [
+      'Ser mayor de 16 años',
+      'Secundaria completa',
+      'Entrevista personal'
+    ],
+    malla: [
+      'Anatomía y fisiología de la piel',
+      'Técnicas de limpieza facial',
+      'Tratamientos hidratantes',
+      'Rejuvenecimiento facial',
+      'Prácticas supervisadas'
+    ],
+    promociones: [
+      '10% de descuento por pago al contado',
+      'Matrícula gratis hasta el 30 de septiembre'
+    ],
+    imagen: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80',
+    rating: 4.9,
+    estudiantes: 850,
+    instructor: 'María González',
+    precio: '$2,500',
+    certificacion: 'Certificado Profesional'
+  },
+  cosmiatria: {
+    titulo: 'Cosmiatría',
+    descripcion: 'Especialízate en tratamientos estéticos avanzados y equipos de última tecnología.',
+    duracion: '8 meses',
+    requisitos: [
+      'Ser mayor de 18 años',
+      'Bachillerato completo',
+      'Curso básico de cosmetología'
+    ],
+    malla: [
+      'Equipos de alta tecnología',
+      'Tratamientos faciales avanzados',
+      'Microdermoabrasión',
+      'Radiofrecuencia',
+      'Prácticas con equipos'
+    ],
+    promociones: [
+      '15% de descuento por pago al contado',
+      'Financiamiento en 6 cuotas sin interés'
+    ],
+    imagen: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80',
+    rating: 4.8,
+    estudiantes: 620,
+    instructor: 'Dr. Carlos Mendoza',
+    precio: '$3,200',
+    certificacion: 'Certificado Profesional'
+  },
+  maquillaje: {
+    titulo: 'Maquillaje Profesional',
+    descripcion: 'Domina el arte del maquillaje social, artístico y de alta costura.',
+    duracion: '4 meses',
+    requisitos: [
+      'Ser mayor de 16 años',
+      'Secundaria completa',
+      'Portafolio básico'
+    ],
+    malla: [
+      'Teoría del color',
+      'Maquillaje social',
+      'Maquillaje artístico',
+      'Técnicas de contouring',
+      'Portfolio profesional'
+    ],
+    promociones: [
+      'Kit de maquillaje profesional incluido',
+      '20% de descuento por pago anticipado'
+    ],
+    imagen: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=600&q=80',
+    rating: 4.9,
+    estudiantes: 1200,
+    instructor: 'Isabella Rodríguez',
+    precio: '$1,800',
+    certificacion: 'Certificado Profesional'
   }
 };
 
@@ -57,7 +137,6 @@ const DetalleCurso = () => {
 
   const [activeSection, setActiveSection] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [expandedModule, setExpandedModule] = useState(null);
 
   useEffect(() => {
     setIsVisible(true);
@@ -96,11 +175,6 @@ const DetalleCurso = () => {
       </div>
     );
   }
-
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 }
-  };
 
   const handleSectionClick = (section) => {
     setActiveSection(activeSection === section ? null : section);
@@ -566,7 +640,7 @@ const DetalleCurso = () => {
                 }}
               />
             </div>
-            <AnimatedButton href="/">
+            <AnimatedButton href={`/pago?curso=${cursoKey}`}>
               <Sparkles size={18} />
               Inscríbete Ahora
             </AnimatedButton>
@@ -625,7 +699,7 @@ const DetalleCurso = () => {
             }}>
               Todos los requisitos son flexibles y evaluamos cada caso de manera individual.
             </p>
-            <AnimatedButton href="/" variant="secondary">
+            <AnimatedButton href={`/pago?curso=${cursoKey}`} variant="secondary">
               <Sparkles size={18} />
               Consultar Admisión
             </AnimatedButton>
@@ -699,7 +773,7 @@ const DetalleCurso = () => {
                 </div>
               ))}
             </div>
-            <AnimatedButton href="/">
+            <AnimatedButton href={`/pago?curso=${cursoKey}`}>
               <BookOpen size={18} />
               Ver Programa Completo
             </AnimatedButton>
@@ -784,7 +858,7 @@ const DetalleCurso = () => {
                 Precio especial por tiempo limitado
               </p>
             </div>
-            <AnimatedButton href="/">
+            <AnimatedButton href={`/pago?curso=${cursoKey}`}>
               <Gift size={18} />
               Aprovechar Promoción
             </AnimatedButton>
@@ -821,7 +895,7 @@ const DetalleCurso = () => {
                 justifyContent: 'center',
                 flexWrap: 'wrap'
               }}>
-                <AnimatedButton href="/">
+                <AnimatedButton href={`/pago?curso=${cursoKey}`}>
                   <Sparkles size={20} />
                   Inscribirme Ahora
                 </AnimatedButton>

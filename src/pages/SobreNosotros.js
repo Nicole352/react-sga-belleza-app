@@ -297,7 +297,7 @@ const SobreNosotros = () => {
 
           /* ESTILOS DEL CARRUSEL - EXACTAMENTE IGUALES QUE INICIO.JS */
           .carousel-section {
-            padding: 0px 0 5px 0; 
+            padding: 0px 0 5px 0; // Reducido aún más
             position: relative;
           }
 
@@ -686,7 +686,7 @@ const SobreNosotros = () => {
             </div>
           </div>
 
-          {/* CARRUSEL DE INSTALACIONES */}
+          {/* CARRUSEL DE INSTALACIONES - EXACTAMENTE IGUAL QUE INICIO.JS */}
           <section className="carousel-section">
             <div className="content">
               <h2 className="section-title" style={{ textAlign: 'center' }}>
@@ -769,6 +769,64 @@ const SobreNosotros = () => {
                   width: '80px',
                   height: '80px',
                   background: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
+                  borderRadius: '20px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '24px',
+                  boxShadow: '0 8px 25px rgba(251, 191, 36, 0.4)'
+                }}
+              >
+                <Target size={36} color="#fff" />
+              </div>
+              
+              <h2
+                style={{
+                  fontSize: '2rem',
+                  fontWeight: '700',
+                  color: '#1a1a1a',
+                  marginBottom: '20px'
+                }}
+              >
+                Nuestra Misión
+              </h2>
+              
+              <p
+                style={{
+                  fontSize: '1.1rem',
+                  color: '#666',
+                  lineHeight: 1.7,
+                  margin: 0
+                }}
+              >
+                Formar profesionales integrales en el área de la estética y belleza, 
+                brindando educación de calidad con tecnología de vanguardia, 
+                contribuyendo al desarrollo personal y profesional de nuestras 
+                estudiantes para que se conviertan en líderes transformadoras de la 
+                industria.
+              </p>
+            </div>
+
+            {/* Visión */}
+            <div
+              style={{
+                background: 'rgba(255, 255, 255, 0.95)',
+                borderRadius: '24px',
+                padding: '40px',
+                backdropFilter: 'blur(20px)',
+                border: '1px solid rgba(251, 191, 36, 0.2)',
+                boxShadow: '0 15px 35px rgba(0, 0, 0, 0.1)',
+                transform: isVisible ? 'translateY(0)' : 'translateY(50px)',
+                opacity: isVisible ? 1 : 0,
+                transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
+                transitionDelay: '900ms'
+              }}
+            >
+              <div
+                style={{
+                  width: '80px',
+                  height: '80px',
+                  background: 'linear-gradient(135deg, #10b981, #059669)',
                   borderRadius: '20px',
                   display: 'flex',
                   alignItems: 'center',

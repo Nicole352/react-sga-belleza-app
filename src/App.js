@@ -9,6 +9,7 @@ import PaginaContactenos from './pages/Contactenos';
 import DetalleCurso from './pages/DetalleCurso';
 import Header from './components/Header';
 import Pago from './pages/Pago';
+import DashboardLayout from './pages/DashboardLayout';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/contactenos" element={<PaginaContactenos />} />
           <Route path="/detalle-curso" element={<DetalleCurso />} />
           <Route path="/pago" element={<Pago />} />
+          <Route path="/dashboard/*" element={<DashboardLayout />} />
         </Routes>
       </div>
     </Router>

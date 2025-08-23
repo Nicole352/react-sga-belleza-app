@@ -19,7 +19,7 @@ const PaginaInicio = () => {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Manteniendo exactamente las URLs proporcionadas
+  // Manteniendo exactamente las URLs proporcionadas para el hero
   const heroImages = [
     {
       url: 'https://www.lahora.com.ec/__export/1753063265364/sites/lahora/img/2025/07/20/jexssica_vexlez.jpeg_1981115046.jpeg',
@@ -43,47 +43,47 @@ const PaginaInicio = () => {
     }
   ];
 
-  // Imágenes del carrusel de instalaciones
+  // Imágenes del carrusel de instalaciones - AQUÍ PUEDES AGREGAR TUS IMÁGENES
   const carouselImages = [
     {
       id: 1,
       title: "Tratamientos Faciales de Lujo",
       description: "Tecnología de vanguardia para el cuidado facial profesional",
-      emoji: "✨",
-      gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-      overlay: "rgba(102, 126, 234, 0.1)"
+      // Reemplaza esta URL con tu imagen
+      imageUrl: "https://www.lahora.com.ec/__export/1753063265364/sites/lahora/img/2025/07/20/jexssica_vexlez.jpeg_1981115046.jpeg",
+      gradient: "linear-gradient(135deg, rgba(18, 19, 19, 0.8) 0%, rgba(212, 199, 225, 0.8) 100%)",
     },
     {
       id: 2,
       title: "Depilación Láser Premium",
       description: "Equipos de última generación para resultados perfectos",
-      emoji: "⚡",
-      gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-      overlay: "rgba(240, 147, 251, 0.1)"
+      // Reemplaza esta URL con tu imagen
+      imageUrl: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      gradient: "linear-gradient(135deg, rgba(240, 147, 251, 0.8) 0%, rgba(245, 87, 108, 0.8) 100%)",
     },
     {
       id: 3,
       title: "Microblading Especializado",
       description: "Técnicas avanzadas en micropigmentación de cejas",
-      emoji: "🌟",
-      gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-      overlay: "rgba(79, 172, 254, 0.1)"
+      // Reemplaza esta URL con tu imagen
+      imageUrl: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      gradient: "linear-gradient(135deg, rgba(79, 172, 254, 0.8) 0%, rgba(0, 242, 254, 0.8) 100%)",
     },
     {
       id: 4,
       title: "Instalaciones Modernas",
       description: "Ambiente profesional con la mejor tecnología",
-      emoji: "🏢",
-      gradient: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
-      overlay: "rgba(67, 233, 123, 0.1)"
+      // Reemplaza esta URL con tu imagen
+      imageUrl: "https://images.unsplash.com/photo-1560472355-536de3962603?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      gradient: "linear-gradient(135deg, rgba(67, 233, 123, 0.8) 0%, rgba(56, 249, 215, 0.8) 100%)",
     },
     {
       id: 5,
       title: "Práctica Profesional",
       description: "Aprendizaje hands-on con casos reales",
-      emoji: "👩‍🎓",
-      gradient: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
-      overlay: "rgba(250, 112, 154, 0.1)"
+      // Reemplaza esta URL con tu imagen
+      imageUrl: "https://images.unsplash.com/photo-1559599238-1c04a77c2c9f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      gradient: "linear-gradient(135deg, rgba(250, 112, 154, 0.8) 0%, rgba(254, 225, 64, 0.8) 100%)",
     }
   ];
 
@@ -228,7 +228,7 @@ const PaginaInicio = () => {
         </div>
       </section>
 
-      {/* Carrusel de Instalaciones */}
+      {/* Carrusel de Instalaciones con Imágenes Reales */}
       <section className="carousel-section">
         <div className="content">
           <h2 className="section-title">
@@ -241,10 +241,17 @@ const PaginaInicio = () => {
               transform: `translateX(-${currentSlide * (100 / carouselImages.length)}%)`
             }}>
               {carouselImages.map((image, index) => (
-                <div key={image.id} className="slide" style={{ background: image.gradient }}>
-                  <div className="slide-overlay" style={{ background: `radial-gradient(circle at center, ${image.overlay} 0%, rgba(0,0,0,0.4) 100%)` }} />
+                <div key={image.id} className="slide">
+                  {/* Imagen de fondo */}
+                  <div className="slide-image">
+                    <img src={image.imageUrl} alt={image.title} />
+                  </div>
+                  
+                  {/* Overlay con gradiente */}
+                  <div className="slide-overlay" style={{ background: image.gradient }} />
+                  
+                  {/* Contenido */}
                   <div className="slide-content">
-                    <div className="slide-emoji">{image.emoji}</div>
                     <h3 className="slide-title">{image.title}</h3>
                     <p className="slide-description">{image.description}</p>
                   </div>
@@ -702,15 +709,14 @@ const PaginaInicio = () => {
         .slide {
           width: 20%;
           height: 100%;
+          position: relative;
+          overflow: hidden;
           display: flex;
           align-items: center;
           justify-content: center;
-          position: relative;
-          flex-direction: column;
-          overflow: hidden;
         }
 
-        .slide-overlay {
+        .slide-image {
           position: absolute;
           top: 0;
           left: 0;
@@ -719,25 +725,31 @@ const PaginaInicio = () => {
           z-index: 1;
         }
 
+        .slide-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          filter: brightness(0.7) contrast(1.1);
+        }
+
+        .slide-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 2;
+        }
+
         .slide-content {
           text-align: center;
           color: white;
-          z-index: 2;
+          z-index: 3;
           padding: 32px;
+          position: relative;
           transform: scale(1);
           transition: transform 0.5s ease-in-out;
-        }
-
-        .slide-emoji {
-          font-size: 6rem;
-          margin-bottom: 20px;
-          filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
-          animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
         }
 
         .slide-title {
@@ -986,11 +998,6 @@ const PaginaInicio = () => {
             right: 10px !important;
           }
 
-          .slide-emoji {
-            font-size: 3rem !important;
-            margin-bottom: 15px !important;
-          }
-
           .slide-title {
             font-size: 1.5rem !important;
             margin-bottom: 12px !important;
@@ -1060,10 +1067,6 @@ const PaginaInicio = () => {
             height: 350px !important;
           }
 
-          .slide-emoji {
-            font-size: 4rem !important;
-          }
-
           .slide-title {
             font-size: 1.8rem !important;
           }
@@ -1090,10 +1093,6 @@ const PaginaInicio = () => {
 
           .carousel-container {
             height: 400px !important;
-          }
-
-          .slide-emoji {
-            font-size: 5rem !important;
           }
 
           .slide-title {

@@ -5,17 +5,13 @@ import {
   Users, 
   Award, 
   ArrowRight, 
-  Play, 
   Star, 
   Heart, 
-  Scissors, 
-  ChevronLeft, 
-  ChevronRight
+  Scissors
 } from 'lucide-react';
 import Footer from '../components/Footer';
 
 const PaginaInicio = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -43,58 +39,9 @@ const PaginaInicio = () => {
     }
   ];
 
-  // Imágenes del carrusel de instalaciones - AQUÍ PUEDES AGREGAR TUS IMÁGENES
-  const carouselImages = [
-    {
-      id: 1,
-      title: "Tratamientos Faciales de Lujo",
-      description: "Tecnología de vanguardia para el cuidado facial profesional",
-      // Reemplaza esta URL con tu imagen
-      imageUrl: "https://www.lahora.com.ec/__export/1753063265364/sites/lahora/img/2025/07/20/jexssica_vexlez.jpeg_1981115046.jpeg",
-      gradient: "linear-gradient(135deg, rgba(18, 19, 19, 0.8) 0%, rgba(212, 199, 225, 0.8) 100%)",
-    },
-    {
-      id: 2,
-      title: "Depilación Láser Premium",
-      description: "Equipos de última generación para resultados perfectos",
-      // Reemplaza esta URL con tu imagen
-      imageUrl: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      gradient: "linear-gradient(135deg, rgba(240, 147, 251, 0.8) 0%, rgba(245, 87, 108, 0.8) 100%)",
-    },
-    {
-      id: 3,
-      title: "Microblading Especializado",
-      description: "Técnicas avanzadas en micropigmentación de cejas",
-      // Reemplaza esta URL con tu imagen
-      imageUrl: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      gradient: "linear-gradient(135deg, rgba(79, 172, 254, 0.8) 0%, rgba(0, 242, 254, 0.8) 100%)",
-    },
-    {
-      id: 4,
-      title: "Instalaciones Modernas",
-      description: "Ambiente profesional con la mejor tecnología",
-      // Reemplaza esta URL con tu imagen
-      imageUrl: "https://images.unsplash.com/photo-1560472355-536de3962603?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      gradient: "linear-gradient(135deg, rgba(67, 233, 123, 0.8) 0%, rgba(56, 249, 215, 0.8) 100%)",
-    },
-    {
-      id: 5,
-      title: "Práctica Profesional",
-      description: "Aprendizaje hands-on con casos reales",
-      // Reemplaza esta URL con tu imagen
-      imageUrl: "https://images.unsplash.com/photo-1559599238-1c04a77c2c9f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      gradient: "linear-gradient(135deg, rgba(250, 112, 154, 0.8) 0%, rgba(254, 225, 64, 0.8) 100%)",
-    }
-  ];
-
-  // Auto-scroll del carrusel de instalaciones cada 4 segundos
   useEffect(() => {
     setIsVisible(true);
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [carouselImages.length]);
+  }, []);
 
   // Auto-scroll del hero cada 5 segundos
   useEffect(() => {
@@ -103,14 +50,6 @@ const PaginaInicio = () => {
     }, 5000);
     return () => clearInterval(heroInterval);
   }, [heroImages.length]);
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
-  };
 
   return (
     <div className="container">
@@ -183,10 +122,10 @@ const PaginaInicio = () => {
                 Ver Cursos Disponibles
                 <ArrowRight size={18} />
               </Link>
-              <button className="secondary-button">
-                <Play size={18} />
-                Ver Instalaciones
-              </button>
+              <Link to="/sobre-nosotros" className="secondary-button">
+                <Heart size={18} />
+                Conoce Nuestras Instalaciones
+              </Link>
             </div>
 
             {/* Estadísticas */}
@@ -225,59 +164,6 @@ const PaginaInicio = () => {
               onClick={() => setCurrentHeroImage(index)}
             />
           ))}
-        </div>
-      </section>
-
-      {/* Carrusel de Instalaciones con Imágenes Reales */}
-      <section className="carousel-section">
-        <div className="content">
-          <h2 className="section-title">
-            Conoce Nuestras 
-            <span className="gradient-text"> Instalaciones</span>
-          </h2>
-          
-          <div className="carousel-container">
-            <div className="carousel-track" style={{
-              transform: `translateX(-${currentSlide * (100 / carouselImages.length)}%)`
-            }}>
-              {carouselImages.map((image, index) => (
-                <div key={image.id} className="slide">
-                  {/* Imagen de fondo */}
-                  <div className="slide-image">
-                    <img src={image.imageUrl} alt={image.title} />
-                  </div>
-                  
-                  {/* Overlay con gradiente */}
-                  <div className="slide-overlay" style={{ background: image.gradient }} />
-                  
-                  {/* Contenido */}
-                  <div className="slide-content">
-                    <h3 className="slide-title">{image.title}</h3>
-                    <p className="slide-description">{image.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Navegación */}
-            <button className="carousel-nav left" onClick={prevSlide}>
-              <ChevronLeft size={20} />
-            </button>
-            <button className="carousel-nav right" onClick={nextSlide}>
-              <ChevronRight size={20} />
-            </button>
-          </div>
-
-          {/* Indicadores */}
-          <div className="carousel-dots">
-            {carouselImages.map((_, index) => (
-              <div
-                key={index}
-                className={`dot ${index === currentSlide ? 'active' : ''}`}
-                onClick={() => setCurrentSlide(index)}
-              />
-            ))}
-          </div>
         </div>
       </section>
 
@@ -589,6 +475,7 @@ const PaginaInicio = () => {
           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           font-family: 'Montserrat', 'Inter', 'Helvetica', sans-serif;
           letter-spacing: 0.5px;
+          text-decoration: none;
         }
 
         .secondary-button:hover {
@@ -672,11 +559,6 @@ const PaginaInicio = () => {
           box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
         }
 
-        .carousel-section {
-          padding: 40px 0;
-          position: relative;
-        }
-
         .section-title {
           font-size: 2.8rem;
           font-weight: 700;
@@ -686,142 +568,6 @@ const PaginaInicio = () => {
           text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
           font-family: 'Playfair Display', 'Georgia', serif;
           letter-spacing: -0.01em;
-        }
-
-        .carousel-container {
-          position: relative;
-          width: 100%;
-          height: 450px;
-          margin: 0 auto;
-          border-radius: 20px;
-          overflow: hidden;
-          box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
-          border: 1px solid rgba(251, 191, 36, 0.2);
-        }
-
-        .carousel-track {
-          display: flex;
-          width: 500%;
-          height: 100%;
-          transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .slide {
-          width: 20%;
-          height: 100%;
-          position: relative;
-          overflow: hidden;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .slide-image {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          z-index: 1;
-        }
-
-        .slide-image img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-          filter: brightness(0.7) contrast(1.1);
-        }
-
-        .slide-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          z-index: 2;
-        }
-
-        .slide-content {
-          text-align: center;
-          color: white;
-          z-index: 3;
-          padding: 32px;
-          position: relative;
-          transform: scale(1);
-          transition: transform 0.5s ease-in-out;
-        }
-
-        .slide-title {
-          font-size: 2.5rem;
-          font-weight: 700;
-          margin-bottom: 16px;
-          text-shadow: 0 6px 20px rgba(0,0,0,0.5);
-          background: linear-gradient(45deg, #fff, #fbbf24);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          font-family: 'Playfair Display', 'Georgia', serif;
-        }
-
-        .slide-description {
-          font-size: 1.2rem;
-          opacity: 0.95;
-          text-shadow: 0 3px 10px rgba(0,0,0,0.5);
-          max-width: 480px;
-          margin: 0 auto;
-          font-family: 'Inter', 'Helvetica', sans-serif;
-        }
-
-        .carousel-nav {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          background-color: rgba(0, 0, 0, 0.7);
-          border: 2px solid rgba(251, 191, 36, 0.3);
-          color: #fbbf24;
-          padding: 16px;
-          border-radius: 50%;
-          cursor: pointer;
-          transition: all 0.3s;
-          z-index: 10;
-          backdrop-filter: blur(15px);
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .carousel-nav:hover {
-          background-color: rgba(251, 191, 36, 0.2);
-          border-color: rgba(251, 191, 36, 0.6);
-          transform: translateY(-50%) scale(1.1);
-        }
-
-        .carousel-nav.left {
-          left: 20px;
-        }
-
-        .carousel-nav.right {
-          right: 20px;
-        }
-
-        .carousel-dots {
-          display: flex;
-          justify-content: center;
-          gap: 12px;
-          margin-top: 20px;
-        }
-
-        .dot {
-          width: 12px;
-          height: 12px;
-          border-radius: 8px;
-          background-color: rgba(255, 255, 255, 0.4);
-          cursor: pointer;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .dot.active {
-          width: 40px;
-          background-color: #fbbf24;
-          box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
         }
 
         .features-section {
@@ -980,37 +726,6 @@ const PaginaInicio = () => {
             margin-bottom: 24px !important;
           }
 
-          .carousel-container {
-            height: 300px !important;
-            margin: 0 10px;
-          }
-
-          .carousel-nav {
-            padding: 12px !important;
-            display: none;
-          }
-
-          .carousel-nav.left {
-            left: 10px !important;
-          }
-
-          .carousel-nav.right {
-            right: 10px !important;
-          }
-
-          .slide-title {
-            font-size: 1.5rem !important;
-            margin-bottom: 12px !important;
-          }
-
-          .slide-description {
-            font-size: 1rem !important;
-          }
-
-          .slide-content {
-            padding: 20px !important;
-          }
-
           .features-grid {
             grid-template-columns: 1fr !important;
             gap: 24px !important;
@@ -1037,10 +752,6 @@ const PaginaInicio = () => {
           .hero-indicators {
             bottom: 16px !important;
           }
-
-          .carousel-dots {
-            margin-top: 16px !important;
-          }
         }
 
         @media (min-width: 481px) and (max-width: 768px) {
@@ -1062,18 +773,6 @@ const PaginaInicio = () => {
             grid-template-columns: repeat(2, 1fr) !important;
             gap: 32px !important;
           }
-
-          .carousel-container {
-            height: 350px !important;
-          }
-
-          .slide-title {
-            font-size: 1.8rem !important;
-          }
-
-          .carousel-nav {
-            padding: 14px !important;
-          }
         }
 
         @media (min-width: 769px) and (max-width: 1024px) {
@@ -1090,14 +789,6 @@ const PaginaInicio = () => {
             grid-template-columns: repeat(2, 1fr) !important;
             gap: 32px !important;
           }
-
-          .carousel-container {
-            height: 400px !important;
-          }
-
-          .slide-title {
-            font-size: 2.2rem !important;
-          }
         }
 
         @media (min-width: 1025px) {
@@ -1107,18 +798,6 @@ const PaginaInicio = () => {
 
           .stats-grid {
             grid-template-columns: repeat(3, 1fr) !important;
-          }
-        }
-
-        /* Touch gestures para móviles */
-        @media (hover: none) and (pointer: coarse) {
-          .carousel-nav {
-            display: block;
-            opacity: 0.8;
-          }
-          
-          .carousel-container {
-            touch-action: pan-x;
           }
         }
       `}</style>

@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, Users, Award, ArrowRight, Play, Star, Heart, Scissors, ChevronLeft, ChevronRight } from 'lucide-react';
+import { 
+  Sparkles, 
+  Users, 
+  Award, 
+  ArrowRight, 
+  Play, 
+  Star, 
+  Heart, 
+  Scissors, 
+  ChevronLeft, 
+  ChevronRight
+} from 'lucide-react';
 import Footer from '../components/Footer';
 
 const PaginaInicio = () => {
@@ -83,7 +94,7 @@ const PaginaInicio = () => {
       setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [carouselImages.length]);
 
   // Auto-scroll del hero cada 5 segundos
   useEffect(() => {
@@ -91,7 +102,7 @@ const PaginaInicio = () => {
       setCurrentHeroImage((prev) => (prev + 1) % heroImages.length);
     }, 5000);
     return () => clearInterval(heroInterval);
-  }, []);
+  }, [heroImages.length]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
@@ -101,492 +112,8 @@ const PaginaInicio = () => {
     setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
   };
 
-  // ESTILOS - COLORES CONSISTENTES CON HEADER/FOOTER Y ESPACIADO REDUCIDO
-  const containerStyle = {
-    minHeight: '100vh',
-    background: 'rgba(0, 0, 0, 0.95)', // ← MISMO COLOR DEL HEADER/FOOTER
-    position: 'relative',
-    overflow: 'hidden',
-    fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif",
-  };
-
-  const particlesStyle = {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    pointerEvents: 'none',
-    opacity: 0.12, // ← REDUCIDO para más elegancia
-    zIndex: 0,
-  };
-
-  const sectionStyle = {
-    position: 'relative',
-    paddingTop: '90px', // ← MÁS REDUCIDO
-    paddingBottom: '30px', // ← MÁS REDUCIDO
-    overflow: 'hidden',
-    zIndex: 1,
-    minHeight: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-  };
-
-  const heroBackgroundStyle = {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: -1,
-  };
-
-  const heroImageStyle = (index) => ({
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: `
-      linear-gradient(
-        135deg, 
-        rgba(0, 0, 0, 0.4) 0%, 
-        rgba(0, 0, 0, 0.2) 50%, 
-        rgba(0, 0, 0, 0.6) 100%
-      ),
-      url('${heroImages[index].url}')
-    `,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center center',
-    backgroundRepeat: 'no-repeat',
-    opacity: index === currentHeroImage ? 1 : 0,
-    transition: 'opacity 1.5s ease-in-out',
-    filter: 'contrast(1.1) brightness(1.05) saturate(1.1)',
-    transform: 'scale(1.02)',
-  });
-
-  const contentStyle = {
-    maxWidth: '1400px', // ← AUMENTADO para usar más espacio horizontal
-    margin: '0 auto',
-    padding: '0 24px', // ← AUMENTADO para más contenido
-    position: 'relative',
-    fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif",
-  };
-
-  const textCenterStyle = {
-    textAlign: 'center',
-  };
-
-  const badgeStyle = {
-    display: 'inline-flex',
-    alignItems: 'center',
-    backgroundColor: 'rgba(251, 191, 36, 0.2)',
-    border: '1px solid rgba(251, 191, 36, 0.3)',
-    borderRadius: '24px',
-    padding: '10px 18px', // ← REDUCIDO
-    marginBottom: '20px', // ← MÁS REDUCIDO
-    backdropFilter: 'blur(15px)',
-    boxShadow: '0 8px 32px rgba(251, 191, 36, 0.15)',
-    fontFamily: "'Montserrat', 'Inter', 'Helvetica', sans-serif",
-    fontWeight: '500',
-    letterSpacing: '0.5px',
-  };
-
-  const titleStyle = {
-    fontSize: '4.2rem', // ← LIGERAMENTE REDUCIDO
-    fontWeight: '400',
-    color: 'white',
-    marginBottom: '16px', // ← MÁS REDUCIDO
-    lineHeight: '1.05', // ← MÁS COMPACTO
-    textShadow: '0 6px 30px rgba(0, 0, 0, 0.8)',
-    fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif",
-    letterSpacing: '-0.02em',
-  };
-
-  const gradientTextStyle = {
-    background: 'linear-gradient(45deg, #fbbf24, #f59e0b, #fbbf24, #d97706)',
-    backgroundSize: '300% 300%',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    display: 'block',
-    animation: 'gradientShift 3s ease-in-out infinite',
-    fontStyle: 'italic',
-  };
-
-  const subtitleStyle = {
-    fontSize: '1.4rem', // ← LIGERAMENTE REDUCIDO
-    color: '#f3f4f6',
-    marginBottom: '20px', // ← MÁS REDUCIDO
-    maxWidth: '850px', // ← AUMENTADO para usar más espacio
-    margin: '0 auto 20px',
-    lineHeight: '1.6', // ← MÁS COMPACTO
-    textShadow: '0 4px 20px rgba(0, 0, 0, 0.8)',
-    fontFamily: "'Crimson Text', 'Georgia', serif",
-    fontWeight: '400',
-    letterSpacing: '0.3px',
-  };
-
-  const dynamicSubtitleStyle = {
-    fontSize: '1.15rem', // ← REDUCIDO
-    color: '#fde68a',
-    marginBottom: '28px', // ← MÁS REDUCIDO
-    fontStyle: 'italic',
-    textShadow: '0 2px 15px rgba(0, 0, 0, 0.7)',
-    fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif",
-    opacity: 0.95,
-    transition: 'all 1s ease-in-out',
-    fontWeight: '300',
-    letterSpacing: '0.5px',
-  };
-
-  const buttonContainerStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '14px', // ← MÁS REDUCIDO
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: '40px', // ← MÁS REDUCIDO
-  };
-
-  const primaryButtonStyle = {
-    background: 'linear-gradient(45deg, #fbbf24, #f59e0b, #fbbf24)',
-    backgroundSize: '200% 200%',
-    color: 'black',
-    padding: '16px 32px', // ← REDUCIDO de 18px 36px
-    borderRadius: '30px',
-    fontSize: '1.1rem',
-    fontWeight: '600',
-    textDecoration: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-    boxShadow: '0 12px 40px rgba(251, 191, 36, 0.4)',
-    animation: 'buttonPulse 2s ease-in-out infinite',
-    fontFamily: "'Montserrat', 'Inter', 'Helvetica', sans-serif",
-    letterSpacing: '0.8px',
-    textTransform: 'uppercase',
-    border: 'none',
-    cursor: 'pointer',
-  };
-
-  const secondaryButtonStyle = {
-    border: '2px solid rgba(251, 191, 36, 0.6)',
-    color: 'white',
-    padding: '16px 32px', // ← REDUCIDO de 18px 36px
-    borderRadius: '30px',
-    fontSize: '1.1rem',
-    fontWeight: '500',
-    background: 'rgba(0, 0, 0, 0.3)',
-    backdropFilter: 'blur(15px)',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-    fontFamily: "'Montserrat', 'Inter', 'Helvetica', sans-serif",
-    letterSpacing: '0.5px',
-  };
-
-  const statsGridStyle = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', // ← AUMENTADO para cards más anchas
-    gap: '40px', // ← AUMENTADO gap horizontal
-    maxWidth: '1300px', // ← AUMENTADO para usar casi todo el ancho
-    margin: '0 auto',
-    padding: '0 20px', // ← PADDING LATERAL AGREGADO
-  };
-
-  const statCardStyle = {
-    backgroundColor: 'rgba(255, 255, 255, 0.08)',
-    backdropFilter: 'blur(25px)',
-    border: '1px solid rgba(251, 191, 36, 0.3)',
-    borderRadius: '20px',
-    padding: '28px 36px', // ← PADDING HORIZONTAL AUMENTADO
-    transform: isVisible ? 'translateY(0)' : 'translateY(50px)',
-    opacity: isVisible ? 1 : 0,
-    transition: 'all 0.8s ease-out',
-    boxShadow: '0 16px 50px rgba(0, 0, 0, 0.4)',
-    width: '100%', // ← ASEGURAR QUE USE TODO EL ANCHO DISPONIBLE
-  };
-
-  const statNumberStyle = {
-    fontSize: '3.5rem', // ← REDUCIDO de 4rem
-    fontWeight: '300',
-    color: '#fbbf24',
-    marginBottom: '12px', // ← REDUCIDO de 16px
-    textShadow: '0 6px 20px rgba(251, 191, 36, 0.5)',
-    fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Georgia', serif",
-    letterSpacing: '-0.02em',
-  };
-
-  const statTextStyle = {
-    color: '#f3f4f6',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '1.05rem', // ← REDUCIDO de 1.15rem
-    fontFamily: "'Crimson Text', 'Georgia', serif",
-    fontWeight: '400',
-    letterSpacing: '0.5px',
-  };
-
-  // Indicadores del hero
-  const heroIndicatorsStyle = {
-    position: 'absolute',
-    bottom: '24px', // ← REDUCIDO de 30px
-    left: '50%',
-    transform: 'translateX(-50%)',
-    display: 'flex',
-    gap: '10px', // ← REDUCIDO de 12px
-    zIndex: 5,
-  };
-
-  const heroIndicatorStyle = (isActive) => ({
-    width: isActive ? '32px' : '10px', // ← REDUCIDO de 40px/12px
-    height: '10px', // ← REDUCIDO de 12px
-    borderRadius: '5px',
-    backgroundColor: isActive ? '#fbbf24' : 'rgba(255, 255, 255, 0.4)',
-    cursor: 'pointer',
-    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-    boxShadow: isActive ? '0 0 20px rgba(251, 191, 36, 0.6)' : 'none',
-  });
-
-  // Estilos del carrusel de instalaciones
-  const carouselSectionStyle = {
-    padding: '40px 0', // ← MÁS REDUCIDO VERTICALMENTE
-    position: 'relative',
-  };
-
-  const carouselContainerStyle = {
-    position: 'relative',
-    width: '100%',
-    height: '450px', // ← MÁS REDUCIDO VERTICALMENTE
-    margin: '0 auto',
-    borderRadius: '20px',
-    overflow: 'hidden',
-    boxShadow: '0 25px 80px rgba(0, 0, 0, 0.6)',
-    border: '1px solid rgba(251, 191, 36, 0.2)',
-  };
-
-  const carouselTrackStyle = {
-    display: 'flex',
-    width: `${carouselImages.length * 100}%`,
-    height: '100%',
-    transform: `translateX(-${currentSlide * (100 / carouselImages.length)}%)`,
-    transition: 'transform 1s cubic-bezier(0.4, 0, 0.2, 1)',
-  };
-
-  const slideStyle = (image) => ({
-    width: `${100 / carouselImages.length}%`,
-    height: '100%',
-    background: image.gradient,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative',
-    flexDirection: 'column',
-    overflow: 'hidden',
-  });
-
-  const slideOverlayStyle = (image) => ({
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: `radial-gradient(circle at center, ${image.overlay} 0%, rgba(0,0,0,0.4) 100%)`,
-    zIndex: 1,
-  });
-
-  const slideContentStyle = {
-    textAlign: 'center',
-    color: 'white',
-    zIndex: 2,
-    padding: '32px', // ← REDUCIDO de 40px
-    transform: 'scale(1)',
-    transition: 'transform 0.5s ease-in-out',
-  };
-
-  const slideEmojiStyle = {
-    fontSize: '6rem', // ← REDUCIDO de 8rem
-    marginBottom: '20px', // ← REDUCIDO de 30px
-    filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.5))',
-    animation: 'float 4s ease-in-out infinite',
-  };
-
-  const slideTitleStyle = {
-    fontSize: '2.5rem', // ← REDUCIDO de 3rem
-    fontWeight: '700',
-    marginBottom: '16px', // ← REDUCIDO de 20px
-    textShadow: '0 6px 20px rgba(0,0,0,0.5)',
-    background: 'linear-gradient(45deg, #fff, #fbbf24)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    fontFamily: "'Playfair Display', 'Georgia', serif",
-  };
-
-  const slideDescStyle = {
-    fontSize: '1.2rem', // ← REDUCIDO de 1.3rem
-    opacity: 0.95,
-    textShadow: '0 3px 10px rgba(0,0,0,0.5)',
-    maxWidth: '480px', // ← REDUCIDO de 600px
-    margin: '0 auto',
-    fontFamily: "'Inter', 'Helvetica', sans-serif",
-  };
-
-  const carouselNavStyle = {
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    border: '2px solid rgba(251, 191, 36, 0.3)',
-    color: '#fbbf24',
-    padding: '16px', // ← REDUCIDO de 20px
-    borderRadius: '50%',
-    cursor: 'pointer',
-    transition: 'all 0.3s',
-    zIndex: 10,
-    backdropFilter: 'blur(15px)',
-    boxShadow: '0 8px 25px rgba(0, 0, 0, 0.3)',
-  };
-
-  const leftNavStyle = {
-    ...carouselNavStyle,
-    left: '20px', // ← REDUCIDO de 30px
-  };
-
-  const rightNavStyle = {
-    ...carouselNavStyle,
-    right: '20px', // ← REDUCIDO de 30px
-  };
-
-  const dotsContainerStyle = {
-    display: 'flex',
-    justifyContent: 'center',
-    gap: '12px', // ← REDUCIDO de 16px
-    marginTop: '20px', // ← REDUCIDO de 30px
-  };
-
-  const dotStyle = (isActive) => ({
-    width: isActive ? '40px' : '12px', // ← REDUCIDO de 50px/15px
-    height: '12px', // ← REDUCIDO de 15px
-    borderRadius: '8px', // ← REDUCIDO de 10px
-    backgroundColor: isActive ? '#fbbf24' : 'rgba(255, 255, 255, 0.4)',
-    cursor: 'pointer',
-    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-    boxShadow: isActive ? '0 0 20px rgba(251, 191, 36, 0.6)' : 'none',
-  });
-
-  const featuresStyle = {
-    padding: '40px 0', // ← MÁS REDUCIDO VERTICALMENTE
-    position: 'relative',
-  };
-
-  const featuresTitleStyle = {
-    fontSize: '2.8rem', // ← MÁS REDUCIDO VERTICALMENTE
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: '12px', // ← MÁS REDUCIDO
-    textAlign: 'center',
-    textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
-    fontFamily: "'Playfair Display', 'Georgia', serif",
-    letterSpacing: '-0.01em',
-  };
-
-  const featuresSubtitleStyle = {
-    fontSize: '1.15rem', // ← REDUCIDO
-    color: '#d1d5db',
-    maxWidth: '600px',
-    margin: '0 auto 32px', // ← MÁS REDUCIDO
-    textAlign: 'center',
-    fontFamily: "'Inter', 'Helvetica', sans-serif",
-    lineHeight: '1.6',
-  };
-
-  const featuresGridStyle = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', // ← AUMENTADO para cards más anchas
-    gap: '40px', // ← AUMENTADO gap
-    maxWidth: '1300px', // ← AUMENTADO para usar casi todo el ancho
-    margin: '0 auto',
-    padding: '0 20px', // ← PADDING LATERAL AGREGADO
-  };
-
-  const featureCardStyle = {
-    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02))',
-    backdropFilter: 'blur(20px)',
-    border: '1px solid rgba(251, 191, 36, 0.2)',
-    borderRadius: '20px',
-    padding: '32px 36px', // ← PADDING HORIZONTAL AUMENTADO
-    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-    cursor: 'pointer',
-    boxShadow: '0 12px 40px rgba(0, 0, 0, 0.3)',
-    width: '100%', // ← ASEGURAR QUE USE TODO EL ANCHO DISPONIBLE
-  };
-
-  const featureIconStyle = {
-    width: '64px', // ← REDUCIDO de 80px
-    height: '64px',
-    background: 'linear-gradient(45deg, #fbbf24, #f59e0b)',
-    borderRadius: '16px', // ← REDUCIDO de 20px
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: '20px', // ← REDUCIDO de 28px
-    transition: 'transform 0.3s',
-    boxShadow: '0 10px 30px rgba(251, 191, 36, 0.3)',
-  };
-
-  const featureTitleStyle = {
-    fontSize: '1.4rem', // ← REDUCIDO de 1.6rem
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: '12px', // ← REDUCIDO de 16px
-    fontFamily: "'Playfair Display', 'Georgia', serif",
-  };
-
-  const featureDescStyle = {
-    color: '#d1d5db',
-    lineHeight: '1.6',
-    fontFamily: "'Inter', 'Helvetica', sans-serif",
-    fontSize: '0.95rem',
-  };
-
-  const ctaStyle = {
-    padding: '40px 0', // ← MÁS REDUCIDO VERTICALMENTE
-  };
-
-  const ctaContentStyle = {
-    background: 'linear-gradient(45deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.15))',
-    border: '1px solid rgba(251, 191, 36, 0.3)',
-    borderRadius: '24px',
-    padding: '36px 48px', // ← PADDING HORIZONTAL AUMENTADO
-    maxWidth: '1000px', // ← AUMENTADO para usar más espacio
-    margin: '0 auto',
-    textAlign: 'center',
-    backdropFilter: 'blur(20px)',
-    boxShadow: '0 30px 60px rgba(0, 0, 0, 0.4)',
-  };
-
-  const ctaTitleStyle = {
-    fontSize: '2.8rem', // ← MÁS REDUCIDO
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: '16px', // ← MÁS REDUCIDO
-    textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
-    fontFamily: "'Playfair Display', 'Georgia', serif",
-    letterSpacing: '-0.01em',
-  };
-
-  const ctaTextStyle = {
-    fontSize: '1.15rem', // ← REDUCIDO
-    color: '#d1d5db',
-    marginBottom: '24px', // ← MÁS REDUCIDO
-    fontFamily: "'Inter', 'Helvetica', sans-serif",
-    lineHeight: '1.6',
-  };
-
   return (
-    <div style={containerStyle}>
+    <div className="container">
       {/* Google Fonts */}
       <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
@@ -594,128 +121,94 @@ const PaginaInicio = () => {
       />
 
       {/* Efectos de fondo con partículas animadas */}
-      <div style={particlesStyle}>
+      <div className="particles">
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
+            className="particle"
             style={{
-              position: 'absolute',
-              width: `${3 + Math.random() * 4}px`,
-              height: `${3 + Math.random() * 4}px`,
-              backgroundColor: '#fbbf24',
-              borderRadius: '50%',
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animation: `twinkle ${2 + Math.random() * 3}s ease-in-out infinite ${Math.random() * 2}s`,
+              animationDelay: `${Math.random() * 2}s`,
+              animationDuration: `${2 + Math.random() * 3}s`
             }}
           />
         ))}
       </div>
 
       {/* Hero Section con Carrusel */}
-      <section style={sectionStyle}>
+      <section className="hero-section">
         {/* Carrusel de imágenes de fondo */}
-        <div style={heroBackgroundStyle}>
+        <div className="hero-background">
           {heroImages.map((image, index) => (
-            <div key={index} style={heroImageStyle(index)} />
+            <div key={index} className={`hero-image ${index === currentHeroImage ? 'active' : ''}`}>
+              <img src={image.url} alt={image.title} />
+            </div>
           ))}
         </div>
         
         {/* Overlay adicional para mejor legibilidad */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%)',
-          zIndex: 0,
-        }} />
+        <div className="hero-overlay" />
 
-        <div style={contentStyle}>
-          <div style={{...textCenterStyle, position: 'relative', zIndex: 2}}>
+        <div className="content">
+          <div className="hero-content">
             {/* Badge */}
-            <div style={badgeStyle}>
-              <Sparkles size={16} style={{ color: '#fbbf24', marginRight: '8px' }} />
-              <span style={{ color: '#fde68a', fontSize: '0.95rem', fontWeight: '500' }}>
-                Educación de Excelencia en Estética
-              </span>
+            <div className="badge">
+              <Sparkles size={16} />
+              <span>Educación de Excelencia en Estética</span>
             </div>
 
             {/* Título Principal */}
-            <h1 style={{...titleStyle, textShadow: '0 8px 40px rgba(0, 0, 0, 0.9)'}}>
+            <h1 className="hero-title">
               Transforma vidas
-              <span style={gradientTextStyle}>
+              <span className="gradient-text">
                 con Belleza
               </span>
             </h1>
 
             {/* Subtítulo dinámico basado en la imagen actual */}
-            <p style={dynamicSubtitleStyle}>
+            <p className="dynamic-subtitle">
               {heroImages[currentHeroImage].subtitle}
             </p>
 
             {/* Subtítulo principal */}
-            <p style={{...subtitleStyle, textShadow: '0 6px 25px rgba(0, 0, 0, 0.9)'}}>
+            <p className="hero-subtitle">
               Conviértete en una esteticista profesional con nuestros cursos certificados. 
               Aprende técnicas avanzadas de belleza y estética con los mejores especialistas.
             </p>
 
             {/* Botones CTA */}
-            <div style={buttonContainerStyle}>
-              <Link 
-                to="/cursos" 
-                style={{...primaryButtonStyle, zIndex: 10, position: 'relative'}}
-                onMouseEnter={(e) => {
-                  e.target.style.transform = 'translateY(-2px) scale(1.05)';
-                  e.target.style.boxShadow = '0 16px 50px rgba(251, 191, 36, 0.5)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.transform = 'translateY(0) scale(1)';
-                  e.target.style.boxShadow = '0 12px 40px rgba(251, 191, 36, 0.4)';
-                }}
-              >
+            <div className="button-container">
+              <Link to="/cursos" className="primary-button">
                 Ver Cursos Disponibles
-                <ArrowRight size={18} style={{ marginLeft: '8px' }} />
+                <ArrowRight size={18} />
               </Link>
-              <button 
-                style={{...secondaryButtonStyle, zIndex: 10, position: 'relative'}}
-                onMouseEnter={(e) => {
-                  e.target.style.background = 'rgba(251, 191, 36, 0.1)';
-                  e.target.style.borderColor = 'rgba(251, 191, 36, 0.8)';
-                  e.target.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.background = 'rgba(0, 0, 0, 0.3)';
-                  e.target.style.borderColor = 'rgba(251, 191, 36, 0.6)';
-                  e.target.style.transform = 'translateY(0)';
-                }}
-              >
-                <Play size={18} style={{ marginRight: '8px' }} />
+              <button className="secondary-button">
+                <Play size={18} />
                 Ver Instalaciones
               </button>
             </div>
 
             {/* Estadísticas */}
-            <div style={statsGridStyle}>
-              <div style={{...statCardStyle, transitionDelay: '0.2s'}}>
-                <div style={statNumberStyle}>500+</div>
-                <div style={statTextStyle}>
-                  <Users size={16} style={{ marginRight: '8px' }} />
+            <div className="stats-grid">
+              <div className="stat-card">
+                <div className="stat-number">500+</div>
+                <div className="stat-text">
+                  <Users size={16} />
                   Estudiantes Graduadas
                 </div>
               </div>
-              <div style={{...statCardStyle, transitionDelay: '0.4s'}}>
-                <div style={statNumberStyle}>15+</div>
-                <div style={statTextStyle}>
-                  <Sparkles size={16} style={{ marginRight: '8px' }} />
+              <div className="stat-card">
+                <div className="stat-number">15+</div>
+                <div className="stat-text">
+                  <Sparkles size={16} />
                   Cursos Especializados
                 </div>
               </div>
-              <div style={{...statCardStyle, transitionDelay: '0.6s'}}>
-                <div style={statNumberStyle}>98%</div>
-                <div style={statTextStyle}>
-                  <Star size={16} style={{ marginRight: '8px' }} />
+              <div className="stat-card">
+                <div className="stat-number">98%</div>
+                <div className="stat-text">
+                  <Star size={16} />
                   Empleabilidad
                 </div>
               </div>
@@ -724,11 +217,11 @@ const PaginaInicio = () => {
         </div>
 
         {/* Indicadores del Hero */}
-        <div style={heroIndicatorsStyle}>
+        <div className="hero-indicators">
           {heroImages.map((_, index) => (
             <div
               key={index}
-              style={heroIndicatorStyle(index === currentHeroImage)}
+              className={`hero-indicator ${index === currentHeroImage ? 'active' : ''}`}
               onClick={() => setCurrentHeroImage(index)}
             />
           ))}
@@ -736,68 +229,44 @@ const PaginaInicio = () => {
       </section>
 
       {/* Carrusel de Instalaciones */}
-      <section style={carouselSectionStyle}>
-        <div style={contentStyle}>
-          <h2 style={{...featuresTitleStyle, marginBottom: '32px'}}>
+      <section className="carousel-section">
+        <div className="content">
+          <h2 className="section-title">
             Conoce Nuestras 
-            <span style={gradientTextStyle}> Instalaciones</span>
+            <span className="gradient-text"> Instalaciones</span>
           </h2>
           
-          <div style={carouselContainerStyle}>
-            <div style={carouselTrackStyle}>
+          <div className="carousel-container">
+            <div className="carousel-track" style={{
+              transform: `translateX(-${currentSlide * (100 / carouselImages.length)}%)`
+            }}>
               {carouselImages.map((image, index) => (
-                <div key={image.id} style={slideStyle(image)}>
-                  <div style={slideOverlayStyle(image)} />
-                  <div style={slideContentStyle}>
-                    <div style={slideEmojiStyle}>{image.emoji}</div>
-                    <h3 style={slideTitleStyle}>{image.title}</h3>
-                    <p style={slideDescStyle}>{image.description}</p>
+                <div key={image.id} className="slide" style={{ background: image.gradient }}>
+                  <div className="slide-overlay" style={{ background: `radial-gradient(circle at center, ${image.overlay} 0%, rgba(0,0,0,0.4) 100%)` }} />
+                  <div className="slide-content">
+                    <div className="slide-emoji">{image.emoji}</div>
+                    <h3 className="slide-title">{image.title}</h3>
+                    <p className="slide-description">{image.description}</p>
                   </div>
                 </div>
               ))}
             </div>
 
             {/* Navegación */}
-            <button 
-              style={leftNavStyle} 
-              onClick={prevSlide}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = 'rgba(251, 191, 36, 0.2)';
-                e.target.style.borderColor = 'rgba(251, 191, 36, 0.6)';
-                e.target.style.transform = 'translateY(-50%) scale(1.1)';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-                e.target.style.borderColor = 'rgba(251, 191, 36, 0.3)';
-                e.target.style.transform = 'translateY(-50%) scale(1)';
-              }}
-            >
+            <button className="carousel-nav left" onClick={prevSlide}>
               <ChevronLeft size={20} />
             </button>
-            <button 
-              style={rightNavStyle} 
-              onClick={nextSlide}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = 'rgba(251, 191, 36, 0.2)';
-                e.target.style.borderColor = 'rgba(251, 191, 36, 0.6)';
-                e.target.style.transform = 'translateY(-50%) scale(1.1)';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-                e.target.style.borderColor = 'rgba(251, 191, 36, 0.3)';
-                e.target.style.transform = 'translateY(-50%) scale(1)';
-              }}
-            >
+            <button className="carousel-nav right" onClick={nextSlide}>
               <ChevronRight size={20} />
             </button>
           </div>
 
           {/* Indicadores */}
-          <div style={dotsContainerStyle}>
+          <div className="carousel-dots">
             {carouselImages.map((_, index) => (
               <div
                 key={index}
-                style={dotStyle(index === currentSlide)}
+                className={`dot ${index === currentSlide ? 'active' : ''}`}
                 onClick={() => setCurrentSlide(index)}
               />
             ))}
@@ -806,81 +275,45 @@ const PaginaInicio = () => {
       </section>
 
       {/* Features Section */}
-      <section style={featuresStyle}>
-        <div style={contentStyle}>
-          <h2 style={featuresTitleStyle}>
+      <section className="features-section">
+        <div className="content">
+          <h2 className="section-title">
             ¿Por qué elegir la 
-            <span style={gradientTextStyle}> Escuela Jessica Vélez?</span>
+            <span className="gradient-text"> Escuela Jessica Vélez?</span>
           </h2>
-          <p style={featuresSubtitleStyle}>
+          <p className="section-subtitle">
             Líder en formación de esteticistas profesionales con más de 10 años de experiencia
           </p>
 
-          <div style={featuresGridStyle}>
-            <div 
-              style={featureCardStyle}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-6px)';
-                e.currentTarget.style.boxShadow = '0 20px 60px rgba(251, 191, 36, 0.2)';
-                e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.4)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.3)';
-                e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.2)';
-              }}
-            >
-              <div style={featureIconStyle}>
+          <div className="features-grid">
+            <div className="feature-card">
+              <div className="feature-icon">
                 <Heart size={28} color="black" />
               </div>
-              <h3 style={featureTitleStyle}>Atención Personalizada</h3>
-              <p style={featureDescStyle}>
+              <h3 className="feature-title">Atención Personalizada</h3>
+              <p className="feature-description">
                 Grupos reducidos y atención individual para garantizar el mejor aprendizaje. 
                 Cada estudiante recibe seguimiento personalizado durante todo el proceso.
               </p>
             </div>
 
-            <div 
-              style={featureCardStyle}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-6px)';
-                e.currentTarget.style.boxShadow = '0 20px 60px rgba(251, 191, 36, 0.2)';
-                e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.4)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.3)';
-                e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.2)';
-              }}
-            >
-              <div style={featureIconStyle}>
+            <div className="feature-card">
+              <div className="feature-icon">
                 <Scissors size={28} color="black" />
               </div>
-              <h3 style={featureTitleStyle}>Técnicas Avanzadas</h3>
-              <p style={featureDescStyle}>
+              <h3 className="feature-title">Técnicas Avanzadas</h3>
+              <p className="feature-description">
                 Aprende las últimas técnicas en tratamientos faciales, corporales, 
                 depilación láser y medicina estética con equipos de última generación.
               </p>
             </div>
 
-            <div 
-              style={featureCardStyle}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-6px)';
-                e.currentTarget.style.boxShadow = '0 20px 60px rgba(251, 191, 36, 0.2)';
-                e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.4)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.3)';
-                e.currentTarget.style.borderColor = 'rgba(251, 191, 36, 0.2)';
-              }}
-            >
-              <div style={featureIconStyle}>
+            <div className="feature-card">
+              <div className="feature-icon">
                 <Award size={28} color="black" />
               </div>
-              <h3 style={featureTitleStyle}>Certificación Profesional</h3>
-              <p style={featureDescStyle}>
+              <h3 className="feature-title">Certificación Profesional</h3>
+              <p className="feature-description">
                 Obtén tu certificación reconocida nacionalmente y accede a oportunidades 
                 laborales en los mejores spas y centros estéticos del país.
               </p>
@@ -890,37 +323,806 @@ const PaginaInicio = () => {
       </section>
 
       {/* CTA Final */}
-      <section style={ctaStyle}>
-        <div style={contentStyle}>
-          <div style={ctaContentStyle}>
-            <h2 style={ctaTitleStyle}>
+      <section className="cta-section">
+        <div className="content">
+          <div className="cta-content">
+            <h2 className="cta-title">
               ¿Lista para comenzar tu carrera?
             </h2>
-            <p style={ctaTextStyle}>
+            <p className="cta-text">
               Únete a cientos de esteticistas exitosas que se formaron con nosotras
             </p>
-            <Link 
-              to="/cursos"
-              style={primaryButtonStyle}
-              onMouseEnter={(e) => {
-                e.target.style.transform = 'translateY(-2px) scale(1.05)';
-                e.target.style.boxShadow = '0 16px 50px rgba(251, 191, 36, 0.5)';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.transform = 'translateY(0) scale(1)';
-                e.target.style.boxShadow = '0 12px 40px rgba(251, 191, 36, 0.4)';
-              }}
-            >
-              <Sparkles size={18} style={{ marginRight: '8px' }} />
+            <Link to="/cursos" className="primary-button">
+              <Sparkles size={18} />
               Ver Cursos Disponibles
             </Link>
           </div>
         </div>
       </section>
-
-      {/* Footer Component */}
       <Footer />
-      
+
+      <style jsx>{`
+        .container {
+          min-height: 100vh;
+          background: rgba(0, 0, 0, 0.95);
+          position: relative;
+          overflow: hidden;
+          font-family: 'Cormorant Garamond', 'Playfair Display', 'Georgia', serif;
+        }
+
+        .particles {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          opacity: 0.12;
+          z-index: 0;
+        }
+
+        .particle {
+          position: absolute;
+          width: 3px;
+          height: 3px;
+          background-color: #fbbf24;
+          border-radius: 50%;
+          animation: twinkle ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.3; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .hero-section {
+          position: relative;
+          padding: 90px 0 30px;
+          overflow: hidden;
+          z-index: 1;
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+        }
+
+        .hero-background {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: -1;
+        }
+
+        .hero-image {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          opacity: 0;
+          transition: opacity 1.5s ease-in-out;
+        }
+
+        .hero-image.active {
+          opacity: 1;
+        }
+
+        .hero-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center center;
+          filter: contrast(1.1) brightness(1.05) saturate(1.1);
+          transform: scale(1.02);
+        }
+
+        .hero-image::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.6) 100%);
+          z-index: 1;
+        }
+
+        .hero-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
+          z-index: 0;
+        }
+
+        .content {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 0 24px;
+          position: relative;
+          font-family: 'Cormorant Garamond', 'Playfair Display', 'Georgia', serif;
+        }
+
+        .hero-content {
+          text-align: center;
+          position: relative;
+          z-index: 2;
+        }
+
+        .badge {
+          display: inline-flex;
+          align-items: center;
+          background-color: rgba(251, 191, 36, 0.2);
+          border: 1px solid rgba(251, 191, 36, 0.3);
+          border-radius: 24px;
+          padding: 10px 18px;
+          margin-bottom: 20px;
+          backdrop-filter: blur(15px);
+          box-shadow: 0 8px 32px rgba(251, 191, 36, 0.15);
+          font-family: 'Montserrat', 'Inter', 'Helvetica', sans-serif;
+          font-weight: 500;
+          letter-spacing: 0.5px;
+          gap: 8px;
+        }
+
+        .badge svg {
+          color: #fbbf24;
+        }
+
+        .badge span {
+          color: #fde68a;
+          font-size: 0.95rem;
+          font-weight: 500;
+        }
+
+        .hero-title {
+          font-size: 4.2rem;
+          font-weight: 400;
+          color: white;
+          margin-bottom: 16px;
+          line-height: 1.05;
+          text-shadow: 0 8px 40px rgba(0, 0, 0, 0.9);
+          font-family: 'Cormorant Garamond', 'Playfair Display', 'Georgia', serif;
+          letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+          background: linear-gradient(45deg, #fbbf24, #f59e0b, #fbbf24, #d97706);
+          background-size: 300% 300%;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          display: block;
+          animation: gradientShift 3s ease-in-out infinite;
+          font-style: italic;
+        }
+
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        .dynamic-subtitle {
+          font-size: 1.15rem;
+          color: #fde68a;
+          margin-bottom: 28px;
+          font-style: italic;
+          text-shadow: 0 2px 15px rgba(0, 0, 0, 0.7);
+          font-family: 'Cormorant Garamond', 'Playfair Display', 'Georgia', serif;
+          opacity: 0.95;
+          transition: all 1s ease-in-out;
+          font-weight: 300;
+          letter-spacing: 0.5px;
+        }
+
+        .hero-subtitle {
+          font-size: 1.4rem;
+          color: #f3f4f6;
+          margin: 0 auto 20px;
+          max-width: 850px;
+          line-height: 1.6;
+          text-shadow: 0 6px 25px rgba(0, 0, 0, 0.9);
+          font-family: 'Crimson Text', 'Georgia', serif;
+          font-weight: 400;
+          letter-spacing: 0.3px;
+        }
+
+        .button-container {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 40px;
+        }
+
+        .primary-button {
+          background: linear-gradient(45deg, #fbbf24, #f59e0b, #fbbf24);
+          background-size: 200% 200%;
+          color: black;
+          padding: 16px 32px;
+          border-radius: 30px;
+          font-size: 1.1rem;
+          font-weight: 600;
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 12px 40px rgba(251, 191, 36, 0.4);
+          animation: buttonPulse 2s ease-in-out infinite;
+          font-family: 'Montserrat', 'Inter', 'Helvetica', sans-serif;
+          letter-spacing: 0.8px;
+          text-transform: uppercase;
+          border: none;
+          cursor: pointer;
+        }
+
+        .primary-button:hover {
+          transform: translateY(-2px) scale(1.05);
+          box-shadow: 0 16px 50px rgba(251, 191, 36, 0.5);
+        }
+
+        .secondary-button {
+          border: 2px solid rgba(251, 191, 36, 0.6);
+          color: white;
+          padding: 16px 32px;
+          border-radius: 30px;
+          font-size: 1.1rem;
+          font-weight: 500;
+          background: rgba(0, 0, 0, 0.3);
+          backdrop-filter: blur(15px);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          font-family: 'Montserrat', 'Inter', 'Helvetica', sans-serif;
+          letter-spacing: 0.5px;
+        }
+
+        .secondary-button:hover {
+          background: rgba(251, 191, 36, 0.1);
+          border-color: rgba(251, 191, 36, 0.8);
+          transform: translateY(-2px);
+        }
+
+        @keyframes buttonPulse {
+          0% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-1px) scale(1.02); }
+          100% { transform: translateY(0) scale(1); }
+        }
+
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 40px;
+          max-width: 1300px;
+          margin: 0 auto;
+          padding: 0 20px;
+        }
+
+        .stat-card {
+          background-color: rgba(255, 255, 255, 0.08);
+          backdrop-filter: blur(25px);
+          border: 1px solid rgba(251, 191, 36, 0.3);
+          border-radius: 20px;
+          padding: 28px 36px;
+          transform: translateY(0);
+          opacity: 1;
+          transition: all 0.8s ease-out;
+          box-shadow: 0 16px 50px rgba(0, 0, 0, 0.4);
+          text-align: center;
+        }
+
+        .stat-number {
+          font-size: 3.5rem;
+          font-weight: 300;
+          color: #fbbf24;
+          margin-bottom: 12px;
+          text-shadow: 0 6px 20px rgba(251, 191, 36, 0.5);
+          font-family: 'Cormorant Garamond', 'Playfair Display', 'Georgia', serif;
+          letter-spacing: -0.02em;
+        }
+
+        .stat-text {
+          color: #f3f4f6;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          font-size: 1.05rem;
+          font-family: 'Crimson Text', 'Georgia', serif;
+          font-weight: 400;
+          letter-spacing: 0.5px;
+        }
+
+        .hero-indicators {
+          position: absolute;
+          bottom: 24px;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          gap: 10px;
+          z-index: 5;
+        }
+
+        .hero-indicator {
+          width: 10px;
+          height: 10px;
+          border-radius: 5px;
+          background-color: rgba(255, 255, 255, 0.4);
+          cursor: pointer;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-indicator.active {
+          width: 32px;
+          background-color: #fbbf24;
+          box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+        }
+
+        .carousel-section {
+          padding: 40px 0;
+          position: relative;
+        }
+
+        .section-title {
+          font-size: 2.8rem;
+          font-weight: 700;
+          color: white;
+          margin-bottom: 32px;
+          text-align: center;
+          text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+          font-family: 'Playfair Display', 'Georgia', serif;
+          letter-spacing: -0.01em;
+        }
+
+        .carousel-container {
+          position: relative;
+          width: 100%;
+          height: 450px;
+          margin: 0 auto;
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+          border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        .carousel-track {
+          display: flex;
+          width: 500%;
+          height: 100%;
+          transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide {
+          width: 20%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          flex-direction: column;
+          overflow: hidden;
+        }
+
+        .slide-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 1;
+        }
+
+        .slide-content {
+          text-align: center;
+          color: white;
+          z-index: 2;
+          padding: 32px;
+          transform: scale(1);
+          transition: transform 0.5s ease-in-out;
+        }
+
+        .slide-emoji {
+          font-size: 6rem;
+          margin-bottom: 20px;
+          filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
+          animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+
+        .slide-title {
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin-bottom: 16px;
+          text-shadow: 0 6px 20px rgba(0,0,0,0.5);
+          background: linear-gradient(45deg, #fff, #fbbf24);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-family: 'Playfair Display', 'Georgia', serif;
+        }
+
+        .slide-description {
+          font-size: 1.2rem;
+          opacity: 0.95;
+          text-shadow: 0 3px 10px rgba(0,0,0,0.5);
+          max-width: 480px;
+          margin: 0 auto;
+          font-family: 'Inter', 'Helvetica', sans-serif;
+        }
+
+        .carousel-nav {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background-color: rgba(0, 0, 0, 0.7);
+          border: 2px solid rgba(251, 191, 36, 0.3);
+          color: #fbbf24;
+          padding: 16px;
+          border-radius: 50%;
+          cursor: pointer;
+          transition: all 0.3s;
+          z-index: 10;
+          backdrop-filter: blur(15px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .carousel-nav:hover {
+          background-color: rgba(251, 191, 36, 0.2);
+          border-color: rgba(251, 191, 36, 0.6);
+          transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-nav.left {
+          left: 20px;
+        }
+
+        .carousel-nav.right {
+          right: 20px;
+        }
+
+        .carousel-dots {
+          display: flex;
+          justify-content: center;
+          gap: 12px;
+          margin-top: 20px;
+        }
+
+        .dot {
+          width: 12px;
+          height: 12px;
+          border-radius: 8px;
+          background-color: rgba(255, 255, 255, 0.4);
+          cursor: pointer;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dot.active {
+          width: 40px;
+          background-color: #fbbf24;
+          box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+        }
+
+        .features-section {
+          padding: 40px 0;
+          position: relative;
+        }
+
+        .section-subtitle {
+          font-size: 1.15rem;
+          color: #d1d5db;
+          max-width: 600px;
+          margin: 0 auto 32px;
+          text-align: center;
+          font-family: 'Inter', 'Helvetica', sans-serif;
+          line-height: 1.6;
+        }
+
+        .features-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 40px;
+          max-width: 1300px;
+          margin: 0 auto;
+          padding: 0 20px;
+        }
+
+        .feature-card {
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(251, 191, 36, 0.2);
+          border-radius: 20px;
+          padding: 32px 36px;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          cursor: pointer;
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 20px 60px rgba(251, 191, 36, 0.2);
+          border-color: rgba(251, 191, 36, 0.4);
+        }
+
+        .feature-icon {
+          width: 64px;
+          height: 64px;
+          background: linear-gradient(45deg, #fbbf24, #f59e0b);
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 20px;
+          transition: transform 0.3s;
+          box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
+        }
+
+        .feature-title {
+          font-size: 1.4rem;
+          font-weight: 700;
+          color: white;
+          margin-bottom: 12px;
+          font-family: 'Playfair Display', 'Georgia', serif;
+        }
+
+        .feature-description {
+          color: #d1d5db;
+          line-height: 1.6;
+          font-family: 'Inter', 'Helvetica', sans-serif;
+          font-size: 0.95rem;
+        }
+
+        .cta-section {
+          padding: 40px 0;
+        }
+
+        .cta-content {
+          background: linear-gradient(45deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.15));
+          border: 1px solid rgba(251, 191, 36, 0.3);
+          border-radius: 24px;
+          padding: 36px 48px;
+          max-width: 1000px;
+          margin: 0 auto;
+          text-align: center;
+          backdrop-filter: blur(20px);
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .cta-title {
+          font-size: 2.8rem;
+          font-weight: 700;
+          color: white;
+          margin-bottom: 16px;
+          text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+          font-family: 'Playfair Display', 'Georgia', serif;
+          letter-spacing: -0.01em;
+        }
+
+        .cta-text {
+          font-size: 1.15rem;
+          color: #d1d5db;
+          margin-bottom: 24px;
+          font-family: 'Inter', 'Helvetica', sans-serif;
+          line-height: 1.6;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 480px) {
+          .content {
+            padding: 0 16px;
+          }
+
+          .hero-title {
+            font-size: 2.2rem !important;
+            line-height: 1.1 !important;
+            margin-bottom: 12px !important;
+          }
+
+          .hero-subtitle {
+            font-size: 1rem !important;
+            margin-bottom: 20px !important;
+          }
+
+          .dynamic-subtitle {
+            font-size: 0.95rem !important;
+            margin-bottom: 20px !important;
+          }
+
+          .button-container {
+            width: 100%;
+          }
+
+          .primary-button, .secondary-button {
+            padding: 14px 24px !important;
+            font-size: 1rem !important;
+            width: 100% !important;
+            justify-content: center !important;
+            max-width: 280px;
+          }
+
+          .stats-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+            padding: 0 10px;
+          }
+
+          .stat-card {
+            padding: 20px 24px !important;
+          }
+
+          .stat-number {
+            font-size: 2.5rem !important;
+          }
+
+          .section-title {
+            font-size: 2rem !important;
+            margin-bottom: 24px !important;
+          }
+
+          .carousel-container {
+            height: 300px !important;
+            margin: 0 10px;
+          }
+
+          .carousel-nav {
+            padding: 12px !important;
+            display: none;
+          }
+
+          .carousel-nav.left {
+            left: 10px !important;
+          }
+
+          .carousel-nav.right {
+            right: 10px !important;
+          }
+
+          .slide-emoji {
+            font-size: 3rem !important;
+            margin-bottom: 15px !important;
+          }
+
+          .slide-title {
+            font-size: 1.5rem !important;
+            margin-bottom: 12px !important;
+          }
+
+          .slide-description {
+            font-size: 1rem !important;
+          }
+
+          .slide-content {
+            padding: 20px !important;
+          }
+
+          .features-grid {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+            padding: 0 10px;
+          }
+
+          .feature-card {
+            padding: 24px 28px !important;
+          }
+
+          .cta-content {
+            padding: 28px 32px !important;
+            margin: 0 16px;
+          }
+
+          .cta-title {
+            font-size: 2rem !important;
+          }
+
+          .cta-text {
+            font-size: 1rem !important;
+          }
+
+          .hero-indicators {
+            bottom: 16px !important;
+          }
+
+          .carousel-dots {
+            margin-top: 16px !important;
+          }
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+          .hero-title {
+            font-size: 3rem !important;
+            line-height: 1.1 !important;
+          }
+
+          .hero-subtitle {
+            font-size: 1.2rem !important;
+          }
+
+          .stats-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 24px !important;
+          }
+
+          .features-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 32px !important;
+          }
+
+          .carousel-container {
+            height: 350px !important;
+          }
+
+          .slide-emoji {
+            font-size: 4rem !important;
+          }
+
+          .slide-title {
+            font-size: 1.8rem !important;
+          }
+
+          .carousel-nav {
+            padding: 14px !important;
+          }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+          .hero-title {
+            font-size: 3.5rem !important;
+          }
+
+          .stats-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 32px !important;
+          }
+
+          .features-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 32px !important;
+          }
+
+          .carousel-container {
+            height: 400px !important;
+          }
+
+          .slide-emoji {
+            font-size: 5rem !important;
+          }
+
+          .slide-title {
+            font-size: 2.2rem !important;
+          }
+        }
+
+        @media (min-width: 1025px) {
+          .features-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+          }
+
+          .stats-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+          }
+        }
+
+        /* Touch gestures para móviles */
+        @media (hover: none) and (pointer: coarse) {
+          .carousel-nav {
+            display: block;
+            opacity: 0.8;
+          }
+          
+          .carousel-container {
+            touch-action: pan-x;
+          }
+        }
+      `}</style>
     </div>
   );
 };

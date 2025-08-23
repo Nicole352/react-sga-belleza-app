@@ -36,9 +36,9 @@ const Header = () => {
   };
 
   const containerStyle = {
-    maxWidth: '100%', // ← CAMBIADO: usar todo el ancho disponible
+    maxWidth: '100%',
     margin: '0',
-    padding: '0 5%', // ← CAMBIADO: padding porcentual más ajustado
+    padding: '0 5%',
   };
 
   const navStyle = {
@@ -46,8 +46,8 @@ const Header = () => {
     justifyContent: 'space-between',
     alignItems: 'center',
     transition: 'all 0.3s ease',
-    maxWidth: '1400px', // ← Contenido máximo centrado
-    margin: '0 auto', // ← Centrado del contenido
+    maxWidth: '1400px',
+    margin: '0 auto',
   };
 
   const logoContainerStyle = {
@@ -58,7 +58,7 @@ const Header = () => {
   };
 
   const logoImageStyle = {
-    height: '60px', // ← Altura ajustada para el logo
+    height: '60px',
     width: 'auto',
     transition: 'all 0.3s ease',
     filter: 'drop-shadow(0 4px 15px rgba(251, 191, 36, 0.3))',
@@ -66,22 +66,23 @@ const Header = () => {
 
   const navLinksStyle = {
     display: isMobile ? 'none' : 'flex',
-    gap: '32px', // ← Espacio entre enlaces
+    gap: '24px', // Reducido para acomodar más enlaces
     alignItems: 'center',
   };
 
   const linkStyle = (active) => ({
     fontWeight: '600',
-    fontSize: '16px',
+    fontSize: '15px', // Ligeramente reducido
     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
     color: active ? '#fbbf24' : 'rgba(255, 255, 255, 0.9)',
     textDecoration: 'none',
     position: 'relative',
-    padding: '12px 0',
+    padding: '12px 8px', // Reducido padding horizontal
     textShadow: active ? '0 0 10px rgba(251, 191, 36, 0.5)' : 'none',
     transform: active ? 'translateY(-2px)' : 'translateY(0)',
     fontFamily: "'Montserrat', 'Inter', 'Helvetica', sans-serif",
     letterSpacing: '0.3px',
+    whiteSpace: 'nowrap',
   });
 
   const linkUnderlineStyle = (active) => ({
@@ -130,7 +131,7 @@ const Header = () => {
   const mobileLinksStyle = {
     display: 'flex',
     flexDirection: 'column',
-    gap: '20px',
+    gap: '16px',
   };
 
   const mobileLinkStyle = (active) => ({
@@ -144,10 +145,21 @@ const Header = () => {
       ? '1px solid rgba(251, 191, 36, 0.3)' 
       : '1px solid rgba(255, 255, 255, 0.1)',
     textAlign: 'center',
-    fontSize: '18px',
+    fontSize: '16px',
     transition: 'all 0.3s ease',
     fontFamily: "'Montserrat', 'Inter', 'Helvetica', sans-serif",
+    whiteSpace: 'normal',
   });
+
+  // Lista de navegación actualizada
+  const navigationItems = [
+    { path: '/', label: 'Inicio' },
+    { path: '/cursos', label: 'Cursos' },
+    { path: '/avales', label: 'Avales' },
+    { path: '/sobre-nosotros', label: 'Sobre Nosotros' },
+    { path: '/aula-virtual', label: 'Aula Virtual' },
+    { path: '/contactenos', label: 'Contáctenos' }
+  ];
 
   return (
     <>
@@ -171,13 +183,9 @@ const Header = () => {
               />
             </Link>
 
-            {/* Navigation Links - Movidos al lado derecho */}
+            {/* Navigation Links - Desktop */}
             <div style={navLinksStyle}>
-              {[
-                { path: '/', label: 'Inicio' },
-                { path: '/cursos', label: 'Cursos' },
-                { path: '/aula-virtual', label: 'Aula Virtual' }
-              ].map((item) => (
+              {navigationItems.map((item) => (
                 <Link 
                   key={item.path}
                   to={item.path} 
@@ -227,11 +235,7 @@ const Header = () => {
         {/* Mobile Navigation */}
         <div style={mobileMenuStyle}>
           <div style={mobileLinksStyle}>
-            {[
-              { path: '/', label: 'Inicio' },
-              { path: '/cursos', label: 'Cursos' },
-              { path: '/aula-virtual', label: 'Aula Virtual' }
-            ].map((item) => (
+            {navigationItems.map((item) => (
               <Link 
                 key={item.path}
                 to={item.path}
@@ -251,6 +255,13 @@ const Header = () => {
         @media (max-width: 1200px) {
           .header-container {
             padding: 0 3% !important;
+          }
+        }
+
+        @media (max-width: 1024px) {
+          /* Ajustar gap entre enlaces en tablets */
+          nav div:nth-child(1) div:nth-child(2) {
+            gap: 18px !important;
           }
         }
 

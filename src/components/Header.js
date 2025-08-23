@@ -7,10 +7,17 @@ const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
 
-  // Detectar resize
+  // Detectar resize y cerrar menú automáticamente
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      const mobile = window.innerWidth < 768;
+      
+      // Si cambia de móvil a desktop, cerrar el menú automáticamente
+      if (!mobile && isMobile && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+      
+      setIsMobile(mobile);
     };
 
     handleResize();
@@ -19,7 +26,12 @@ const Header = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [isMobile, isMenuOpen]); // Agregar dependencias para que detecte los cambios
+
+  // Cerrar menú cuando cambia la ruta (navegación)
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
   const isActive = (path) => location.pathname === path;
 

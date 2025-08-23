@@ -15,16 +15,18 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Header />
         <Routes>
-          <Route path="/" element={<PaginaInicio />} />
-          <Route path="/cursos" element={<PaginaCursos />} />
-          <Route path="/avales" element={<PaginaAvales />} />
-          <Route path="/sobre-nosotros" element={<PaginaSobreNosotros />} />
-          <Route path="/aula-virtual" element={<PaginaAulaVirtual />} />
-          <Route path="/contactenos" element={<PaginaContactenos />} />
-          <Route path="/detalle-curso" element={<DetalleCurso />} />
-          <Route path="/pago" element={<Pago />} />
+          {/* Rutas públicas con Header */}
+          <Route path="/" element={<><Header /><PaginaInicio /></>} />
+          <Route path="/cursos" element={<><Header /><PaginaCursos /></>} />
+          <Route path="/avales" element={<><Header /><PaginaAvales /></>} />
+          <Route path="/sobre-nosotros" element={<><Header /><PaginaSobreNosotros /></>} />
+          <Route path="/aula-virtual" element={<><Header /><PaginaAulaVirtual /></>} />
+          <Route path="/contactenos" element={<><Header /><PaginaContactenos /></>} />
+          <Route path="/detalle-curso" element={<><Header /><DetalleCurso /></>} />
+          <Route path="/pago" element={<><Header /><Pago /></>} />
+          
+          {/* Rutas del dashboard sin Header (tiene su propia navegación) */}
           <Route path="/dashboard/*" element={<DashboardLayout />} />
         </Routes>
       </div>
